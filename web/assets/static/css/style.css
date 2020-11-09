@@ -1,0 +1,243 @@
+body {
+    background: #f0f0f0;
+    font-family: 'Spartan', sans-serif;
+    font-weight: 400;
+}
+
+h2 {
+    color: #800080;
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    padding-bottom: 20px;
+    margin: auto;
+}
+
+fieldset{
+    width: 600px;
+    border:3px solid;
+    border-color: #800080;
+    border-radius: 20px;
+    padding: 10%;
+    background: #f8f8f8;
+}
+legend {
+    color: #800080;
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    padding: 0px;
+    margin: 0px;
+    width: 230px;
+}
+
+.page-title {
+    text-align: center;
+    border-bottom: 3px solid;
+    margin-bottom: 20px;
+}
+
+/* by default bootstrap adds a blue glow when form-control is selected */
+/* this changes glow color to purple */
+.form-control:hover {
+  border-color: #8B008B;
+  box-shadow: inset 0 1px 1px rgba(128, 0, 128, 0.075), 0 0 8px rgba(128, 0, 128, 0.6);
+}
+.form-control:focus {
+  border-color: #8B008B;
+  box-shadow: inset 0 1px 1px rgba(128, 0, 128, 0.075), 0 0 8px rgba(128, 0, 128, 0.6);
+}
+
+.form-group {
+    margin: 30px 0px;
+}
+
+.input-wrapper {
+    display: inline-block;
+    position: relative
+}
+
+/* includes key icon on password input */
+.input-wrapper-password:after {
+    font-family: 'FontAwesome';
+    content: '\f084';
+    position: absolute;
+    right: 30px;
+    top: 6px;
+}
+
+/* includes user icon on legal id input */
+.input-wrapper-legal-id:after {
+    font-family: 'FontAwesome';
+    content: '\f007';
+    position: absolute;
+    right: 30px;
+    top: 6px;
+}
+
+.vertical-center {
+  min-height: 100%; 
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+}
+
+button, .save-button, .btn {
+    background-color: #800080;
+    padding: 20px 30px;
+    border: none;
+    border-radius: 6px;
+    color: #fafafa;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+    margin: 20px;
+    width: 170px;
+    line-height: 10px;
+}
+button:hover, .save-button:hover, .btn:hover {
+    background-color: #8B008B;
+    color: #fafafa;
+    transition: .2s;
+}
+
+.navbar-toggler{
+    border: solid 1px;
+    border-color: #fafafa;
+}
+
+/* Navbar style */
+nav{
+    background-color: #800080 !important;
+}
+
+.nav-link {
+    float: right;
+    color: #f0f0f0;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    color: #f0f0f0;
+}
+
+a {
+    color: #8B008B;
+}
+
+a:hover {
+    color: #8B008B;
+}
+
+.nav-item {
+    color: #f0f0f0;
+    padding: 0px 10px;
+    border-right: 3px solid;
+}
+
+.nav-home-button{
+    color: #f0f0f0;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+    width: 160px;
+}
+
+.nav-home-button:hover {
+    color: #f0f0f0;
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+}
+
+.last-nav-link {
+    border: none;
+}
+
+.horizontal-align-center{
+    text-align: center !important;
+}
+
+.list-page-title{
+	text-align: center;
+	padding-top:30px;
+	padding-bottom:30px;
+}
+
+.card-title{
+    color: #800080 !important;
+}
+
+.card{
+    margin-top:20px !important;
+}
+
+.comment-section {
+    font-size: 90%;
+    margin: 0px 40px;
+}
+
+.comment {
+    font-size: 90%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin: 10px 0px;
+}
+
+.comment-head {
+    margin: 20px 0px;
+    border-bottom: 2px solid;
+    color: #800080;
+}
+
+.button-approve, .button-reprove{
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    color: #fafafa;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+    margin: 5px;
+    width: auto;
+    height: auto;
+}
+
+.button-approve .fas, .button-reprove .fas{
+	padding-left:10px;
+}
+.button-approve{
+	background-color: #4CAF50;
+}
+
+.button-reprove{
+	background-color: #dc3b2f;
+}
+
+.button-approve:hover{
+	background-color: #4caf509c;
+}
+
+.button-reprove:hover{
+	background-color: #dc3b2fa8;
+}
+
+.button-delete, .button-edit{
+	width:auto;
+	height:auto;
+	padding: 5px;
+	font-weight: normal !important;
+	font-size:12px;
+	margin:0;
+	color: black;
+	background: None;
+	border: None
+}
+.button-delete:hover , .button-edit:hover{
+	color: #fff;
+}
+
+.details-container{
+	margin-top:40px !important;
+}
