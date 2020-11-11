@@ -6,6 +6,7 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,31 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="teste", urlPatterns = {"/teste"})
 public class teste extends HttpServlet {
-
+    Connection conection = null;
+    
+    public void init() throws ServletException {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            conection = DriverManager.getConnection("jdbc:mysql://localhost/blog", "root", "");
+            
+            System.out.println("Conectei :D");
+        } catch(ClassNotFoundException ex){
+            System.out.println("Não foi possível encontrar o Driver!");
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            System.out.println("Não foi possível conectar ao banco!");
+            ex.printStackTrace();
+        }
+    }
+    
+    public void destroy() {
+        try {
+            conection.close();
+        } catch (SQLException ex) {
+            System.out.println("Não foi possível conectar ao banco!");
+        }
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -47,7 +72,8 @@ public class teste extends HttpServlet {
             
         }
     }
-
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
