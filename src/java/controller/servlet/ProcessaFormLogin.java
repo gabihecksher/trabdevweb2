@@ -59,21 +59,9 @@ public class ProcessaFormLogin extends HttpServlet {
 //                request.getRequestDispatcher("/teste").forward(request,response);
             }
             else{
-                PreparedStatement sql = conection.prepareStatement("insertinto contato values (?, ?)");
-                sql.setString(2, "email@bla.com");
-                sql.setString(3, "senhaaa");
-                sql.setString(4, "nomeee");
-                sql.setString(5, "cpf_teste");
-                sql.setString(5, "papel_teste");
-                sql.executeUpdate();
-                System.out.println("criei o usuarioooo");
-
                 request.getRequestDispatcher("/teste").forward(request,response);
 //                response.sendRedirect("index.html");
             }
-        } catch (SQLException ex) {
-            System.out.println("Não foi possível conectar ao banco!");
-            ex.printStackTrace();
         } finally {
             out.close();
         }

@@ -5,6 +5,10 @@
  */
 package aplicacao;
 
+import Model.UsuarioDAO;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author gabri
@@ -74,5 +78,9 @@ public class Usuario {
         this.cadastro_aprovado = cadastro_aprovado;
     }
     
+    public ArrayList<Usuario> getListaUsuarios(){
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.getListaUsuarios();
+    }
     
 }
