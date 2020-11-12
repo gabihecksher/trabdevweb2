@@ -59,10 +59,10 @@ public class teste extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-//        ArrayList<Usuario> lista_usuarios;
+        UsuarioDAO usuario = new UsuarioDAO();
+        ArrayList<Usuario> lista_usuarios = usuario.getListaUsuarios();
+            
         try {
-            UsuarioDAO usuario = new UsuarioDAO();
-            ArrayList<Usuario> lista_usuarios = usuario.getListaUsuarios();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");

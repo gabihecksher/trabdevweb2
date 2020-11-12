@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import aplicacao.Usuario;
-import model.Conexao;
+import Model.Conexao;
 
 public class UsuarioDAO {
 
@@ -26,10 +26,10 @@ public class UsuarioDAO {
     public ArrayList<Usuario> getListaUsuarios() {
         //Cria o objeto resultado que irá armazenar os registros retornados do BD
         ArrayList<Usuario> resultado = new ArrayList<>();
+        Statement stmt = conexao.createStatement();
         try {
             // Cria o objeto para quer será utilizado para enviar comandos SQL
             // para o BD
-            Statement stmt = conexao.createStatement();
             // Armazena o resultado do comando enviado para o banco de dados
             ResultSet rs = stmt.executeQuery("select * from usuarios");
             // rs.next() Aponta para o próximo registro do BD, se houver um 
