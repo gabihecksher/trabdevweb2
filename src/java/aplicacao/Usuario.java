@@ -6,6 +6,7 @@
 package aplicacao;
 
 import Model.UsuarioDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class Usuario {
         this.cadastro_aprovado = cadastro_aprovado;
     }
     
-    public ArrayList<Usuario> getListaUsuarios(){
+    public ArrayList<Usuario> getListaUsuarios() throws SQLException{
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.getListaUsuarios();
     }

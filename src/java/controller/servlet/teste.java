@@ -13,6 +13,8 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,9 +62,10 @@ public class teste extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         UsuarioDAO usuario = new UsuarioDAO();
-        ArrayList<Usuario> lista_usuarios = usuario.getListaUsuarios();
-            
+        ArrayList<Usuario> lista_usuarios;
+       
         try {
+            lista_usuarios = usuario.getListaUsuarios();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -99,7 +102,12 @@ public class teste extends HttpServlet {
             
 //        } catch (SQLException ex) {
 //            System.out.println("Não foi possível conectar ao banco!");
-        } finally {
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(teste.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        finally {
             out.close();
         }
     }

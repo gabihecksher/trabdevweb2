@@ -12,7 +12,7 @@ public class Conexao {
                 Class.forName("com.mysql.jdbc.Driver"); //load driver                       
                 System.out.println("Driver foi carregado!");
                 //Abre a conexão com o banco de dados via JDBC
-                conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda", "root", "");
+                conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "");
                 System.out.println("Conexão realizada com sucesso!");
             }
             catch( ClassNotFoundException e ) {

@@ -23,7 +23,7 @@ public class UsuarioDAO {
         }
     }
 
-    public ArrayList<Usuario> getListaUsuarios() {
+    public ArrayList<Usuario> getListaUsuarios() throws SQLException {
         //Cria o objeto resultado que irá armazenar os registros retornados do BD
         ArrayList<Usuario> resultado = new ArrayList<>();
         Statement stmt = conexao.createStatement();
@@ -31,7 +31,7 @@ public class UsuarioDAO {
             // Cria o objeto para quer será utilizado para enviar comandos SQL
             // para o BD
             // Armazena o resultado do comando enviado para o banco de dados
-            ResultSet rs = stmt.executeQuery("select * from usuarios");
+            ResultSet rs = stmt.executeQuery("select * from usuario");
             // rs.next() Aponta para o próximo registro do BD, se houver um 
             while (rs.next()) {
                 //Cria o objeto da classe Contato para armazenar os dados
@@ -52,7 +52,7 @@ public class UsuarioDAO {
     public Usuario getUsuarioPorID(int id) {
         Usuario Contato = new Usuario();
         try {
-            String sql = "SELECT * FROM usuarios WHERE id = ?";
+            String sql = "SELECT * FROM usuario WHERE id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, id);
 
@@ -75,7 +75,7 @@ public class UsuarioDAO {
         try {
             Contato.setId(0);
             
-            String sql = "SELECT * FROM usuarios WHERE cpf = ? and senha = ? limit 1";
+            String sql = "SELECT * FROM usuario WHERE cpf = ? and senha = ? limit 1";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setString(1, cpf);
             ps.setString(1, senha);
@@ -98,7 +98,7 @@ public class UsuarioDAO {
             String sql;
             if (usuario.getId() == 0) {
                 // Realizar uma inclusão
-                sql = "INSERT INTO usuarios (nome, cpf, tipo, senha) VALUES (?,?,?,?)";
+                sql = "INSERT INTO usuario (nome, cpf, tipo, senha) VALUES (?,?,?,?)";
             } else {
                 // Realizar uma alteração
                 sql = "UPDATE contato SET nome=?, cpf=?,  tipo=? senha=? WHERE id=?";
@@ -124,7 +124,7 @@ public class UsuarioDAO {
 
     public boolean excluir(int id) {
         try {
-            String sql = "DELETE FROM usuarios WHERE id = ?";
+            String sql = "DELETE FROM usuario WHERE id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
