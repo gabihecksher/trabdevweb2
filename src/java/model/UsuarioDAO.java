@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import aplicacao.Usuario;
+import Aplicacao.Usuario;
 import Model.Conexao;
 
 public class UsuarioDAO {

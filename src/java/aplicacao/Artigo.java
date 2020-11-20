@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package aplicacao;
+package Aplicacao;
+
+import Model.ArtigoDAO;
+import java.util.List;
 
 /**
  *
@@ -11,12 +9,12 @@ package aplicacao;
  */
 public class Artigo {
     private int id;
-    private Usuario usuario;
-    private Categoria categoria;
+    private int usuario_id;
+    private int categoria_id;
     private String titulo;
     private String conteudo;
-    private char liberar;
-    private char aprovado;
+    private String liberar;
+    private String aprovado;
 
     public int getId() {
         return id;
@@ -26,20 +24,20 @@ public class Artigo {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getUsuario() {
+        return usuario_id;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(int usuario_id) {
+        this.usuario_id = usuario_id;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public int getCategoria() {
+        return categoria_id;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCategoria(int categoria_id) {
+        this.categoria_id = categoria_id;
     }
 
     public String getTitulo() {
@@ -58,20 +56,23 @@ public class Artigo {
         this.conteudo = conteudo;
     }
 
-    public char getLiberar() {
+    public String getLiberar() {
         return liberar;
     }
 
-    public void setLiberar(char liberar) {
+    public void setLiberar(String liberar) {
         this.liberar = liberar;
     }
 
-    public char getAprovado() {
+    public String getAprovado() {
         return aprovado;
     }
 
-    public void setAprovado(char aprovado) {
+    public void setAprovado(String aprovado) {
         this.aprovado = aprovado;
     }
     
+    public List<Artigo> listaTodosArtigos() {
+            return new ArtigoDAO().listarTodosArtigosDAO();
+    }
 }

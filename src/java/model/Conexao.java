@@ -13,10 +13,10 @@ public class Conexao {
                 System.out.println("Driver foi carregado!");
                 //Abre a conexão com o banco de dados via JDBC
                 conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "");
-                System.out.println("Conexão realizada com sucesso!");
+                System.out.println("2Conexão realizada com sucesso!");
             }
             catch( ClassNotFoundException e ) {
-                System.out.println("Driver não foi localizado!");
+                System.out.println("2Driver não foi localizado!");
             }
         }
         // Retorna um objeto Connection, contendo a conexão aberta com o BD
