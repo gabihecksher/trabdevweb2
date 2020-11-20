@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ProcessaFormLogin extends HttpServlet {
     Connection conection = null;
     
+    @Override
     public void init() throws ServletException {
         try
         {
@@ -38,6 +39,7 @@ public class ProcessaFormLogin extends HttpServlet {
         }
     }
     
+    @Override
     public void destroy() {
         try {
             conection.close();
@@ -53,7 +55,9 @@ public class ProcessaFormLogin extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String legal_id = request.getParameter("legal_id");
+            System.out.println(legal_id);
             String password = request.getParameter("password");
+            System.out.println(password);
             if (!legal_id.isEmpty() && !password.isEmpty()){
                 response.sendRedirect("assets/templates/list_article.html");
 //                request.getRequestDispatcher("/teste").forward(request,response);

@@ -7,9 +7,8 @@
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/controller/servlet/ProcessaFormLogin.java</file>
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/controller/servlet/teste.java</file>
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/model/UsuarioDAO.java</file>
-            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/web/assets/templates/login.html</file>
-            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/web/assets/templates/list_article.html</file>
-            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/aplicacao/Usuario.java</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/web/assets/templates/add_user.html</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/controller/servlet/ProcessaCadastroUsuario.java</file>
         </group>
     </open-files>
 </project-private>
