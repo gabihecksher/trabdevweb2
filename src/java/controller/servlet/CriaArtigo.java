@@ -6,6 +6,7 @@
 package Controller.servlet;
 
 import Aplicacao.Artigo;
+import Aplicacao.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -60,7 +62,9 @@ public class CriaArtigo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int usuario_id  = 1;//Integer.parseInt(request.getParameter("usuario_id"));
+        HttpSession session = request.getSession();
+        Usuario usuario =  (Usuario) session.getAttribute("current_user");
+        int usuario_id = usuario.getId();
         int categoria_id = Integer.parseInt(request.getParameter("categoria_id"));
         String titulo = request.getParameter("titulo");
         String aprovado = "N";
