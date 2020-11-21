@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package aplicacao;
+package Aplicacao;
 
-/**
- *
- * @author gabri
- */
+import Model.CategoriaDAO;
+
 public class Categoria {
     private int id;
     private String descricao;
@@ -27,5 +20,10 @@ public class Categoria {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+    
+    public Categoria getCategoria(int categoria_id){
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
+        return categoriaDAO.getCategoriaPorID(categoria_id);
     }
 }

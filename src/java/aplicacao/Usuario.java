@@ -84,4 +84,9 @@ public class Usuario {
         return usuarioDAO.getListaUsuarios();
     }
     
+    public Usuario getUsuario(int usuario_id){
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.getUsuarioPorID(usuario_id);
+    }
+        
 }

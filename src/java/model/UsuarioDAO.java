@@ -50,7 +50,7 @@ public class UsuarioDAO {
     }
 
     public Usuario getUsuarioPorID(int id) {
-        Usuario Contato = new Usuario();
+        Usuario usuario = new Usuario();
         try {
             String sql = "SELECT * FROM usuario WHERE id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -59,15 +59,17 @@ public class UsuarioDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                Contato.setId(rs.getInt("id"));
-                Contato.setNome(rs.getString("nome"));
-                Contato.setCpf(rs.getString("cpf"));
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setPapel(rs.getInt("papel"));
             }
 
         } catch (SQLException e) {
             System.out.println("Erro de SQL: " + e.getMessage());
         }
-        return Contato;
+        return usuario;
     }
     
     public Usuario getUsuarioPorLoginSenha(String cpf, String senha) {

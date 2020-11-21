@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class Artigo {
     private int id;
-    private int usuario_id;
-    private int categoria_id;
+    private Usuario usuario;
+    private Categoria categoria;
     private String titulo;
     private String conteudo;
     private String liberar;
@@ -24,20 +24,22 @@ public class Artigo {
         this.id = id;
     }
 
-    public int getUsuario() {
-        return usuario_id;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public void setUsuario(int usuario_id) {
-        this.usuario_id = usuario_id;
+        Usuario usuario = new Usuario();
+        this.usuario = usuario.getUsuario(usuario_id);
     }
 
-    public int getCategoria() {
-        return categoria_id;
+    public Categoria getCategoria() {
+        return this.categoria;
     }
 
     public void setCategoria(int categoria_id) {
-        this.categoria_id = categoria_id;
+        Categoria categoria = new Categoria();
+        this.categoria = categoria.getCategoria(categoria_id);
     }
 
     public String getTitulo() {

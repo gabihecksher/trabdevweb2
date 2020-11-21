@@ -33,14 +33,14 @@
 			<p class="card-text">
                             <small class="text-muted">
 				<span class="glyphicon glyphicon-user"></span>
-                                <%=artigo.getUsuario()%>
+                                <%=artigo.getUsuario().getNome()%>
                             </small>
 			</p>
 						
 			<p class="card-text">
                             <small class="text-muted">
 				<span class="glyphicon glyphicon-user"></span>
-				<%=artigo.getCategoria()%>
+				<%=artigo.getCategoria().getDescricao()%>
                             </small>
 			</p>
 
