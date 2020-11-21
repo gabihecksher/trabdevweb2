@@ -37,8 +37,6 @@ public class ArtigoDAO {
                 }        	
             } catch(Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro ao listar todos os artigos: " + e.getMessage());
-            } finally {
-                Conexao.fechaConexao(connection);
             }
 
             return artigos;
