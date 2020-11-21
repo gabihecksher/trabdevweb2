@@ -5,12 +5,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Artigos</title>
+
         <jsp:include page="head.html" />
     </head>
 
 	<body>	
-            <jsp:include page="navbar.html" />
-	
+            <jsp:include page="navbar.jsp" />
+            
+            <p>Usuário logado: <%= request.getAttribute("user") %></p>
             <div class="container list-container">
 		<div class="list-page-title">
                     <h3>Artigos</h3>

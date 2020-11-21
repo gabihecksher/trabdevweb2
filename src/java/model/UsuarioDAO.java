@@ -5,9 +5,11 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.List;
 import Aplicacao.Usuario;
 import Model.Conexao;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
 
@@ -23,30 +25,35 @@ public class UsuarioDAO {
         }
     }
 
-    public ArrayList<Usuario> getListaUsuarios() throws SQLException {
-        //Cria o objeto resultado que irá armazenar os registros retornados do BD
-        ArrayList<Usuario> resultado = new ArrayList<>();
-        Statement stmt = conexao.createStatement();
+    public List<Usuario> listarTodosUsuariosDAO() {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Usuario> usuarios = new ArrayList<>();
+        Usuario usuario = null;
+
         try {
-            // Cria o objeto para quer será utilizado para enviar comandos SQL
-            // para o BD
-            // Armazena o resultado do comando enviado para o banco de dados
-            ResultSet rs = stmt.executeQuery("select * from usuario");
-            // rs.next() Aponta para o próximo registro do BD, se houver um 
-            while (rs.next()) {
-                //Cria o objeto da classe Contato para armazenar os dados
-                //que vieram do BD
-                Usuario usuario = new Usuario();
+            connection = new Conexao().criaConexao();
+            stmt = connection.prepareStatement("SELECT * FROM usuario");
+            rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                usuario = new Usuario();
                 usuario.setId(rs.getInt("id"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
                 usuario.setNome(rs.getString("nome"));
-                resultado.add(usuario);
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro de SQL: " + e.getMessage());
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setPapel(rs.getInt("papel"));
+                usuario.setCadastroAprovado(rs.getString("cadastro_aprovado"));
+                
+                usuarios.add(usuario);
+            }        	
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar todos os usuarios: " + e.getMessage());
         }
 
-        // Retorna a lista de Contatos encontrados no banco de dados.
-        return resultado;
+        return usuarios;
     }
 
     public Usuario getUsuarioPorID(int id) {
@@ -80,13 +87,20 @@ public class UsuarioDAO {
             String sql = "SELECT * FROM usuario WHERE cpf = ? and senha = ? limit 1";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setString(1, cpf);
-            ps.setString(1, senha);
+            ps.setString(2, senha);
             ResultSet rs = ps.executeQuery();
-
+            
+            System.out.println("CPF:" + cpf);
+            System.out.println("Senha: " + senha);
+            
             if (rs.next()) {
+                System.out.println(rs.getInt("id"));
                 Contato.setId(rs.getInt("id"));
                 Contato.setNome(rs.getString("nome"));
                 Contato.setCpf(rs.getString("cpf"));
+            }
+            else {
+                return null;
             }
 
         } catch (SQLException e) {
