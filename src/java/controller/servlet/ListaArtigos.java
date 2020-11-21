@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,21 +60,10 @@ public class ListaArtigos extends HttpServlet {
         PrintWriter out = response.getWriter();
         Artigo artigo = new Artigo();
         List<Artigo> lista_artigos;
-        
-        
         lista_artigos = artigo.listaTodosArtigos();
-        out.println("<!DOCTYPE html>");
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>Servlet teste</title>");            
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>Lista de usuarios:</h1>");            
-        for (int i = 0; i < lista_artigos.size(); i++){
-            out.println("<p>OI " + lista_artigos.get(i).getTitulo() + "</p>");            
-        }
-        out.println("</body>");
-        out.println("</html>");
+        request.setAttribute("lista_artigos", lista_artigos);
+        RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_article.jsp");
+        rd.forward(request, response);
         
     }
             

@@ -15,7 +15,7 @@ public class ArtigoDAO {
             Connection connection = null;
             PreparedStatement stmt = null;
             ResultSet rs = null;
-            List<Artigo> cursos = new ArrayList<>();
+            List<Artigo> artigos = new ArrayList<>();
             Artigo artigo = null;
 
             try {
@@ -33,7 +33,7 @@ public class ArtigoDAO {
                     artigo.setUsuario(rs.getInt("id_usuario"));
                     artigo.setCategoria(rs.getInt("id_categoria"));
                     
-                    cursos.add(artigo);
+                    artigos.add(artigo);
                 }        	
             } catch(Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro ao listar todos os artigos: " + e.getMessage());
@@ -41,6 +41,6 @@ public class ArtigoDAO {
                 Conexao.fechaConexao(connection);
             }
 
-            return cursos;
+            return artigos;
             }
 }
