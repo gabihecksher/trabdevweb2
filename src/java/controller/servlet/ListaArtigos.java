@@ -71,7 +71,17 @@ public class ListaArtigos extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        System.out.println("Nome da sessão: " + request.getAttribute("user"));
+        PrintWriter out = response.getWriter();
+        Artigo artigo = new Artigo();
+        List<Artigo> lista_artigos;
+        lista_artigos = artigo.listaTodosArtigos();
+        request.setAttribute("lista_artigos", lista_artigos);
+        request.setAttribute("user", request.getAttribute("user"));
+        RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_article.jsp");
+        rd.forward(request, response);
+        
     }
 
     /**

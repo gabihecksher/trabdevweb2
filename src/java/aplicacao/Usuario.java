@@ -21,7 +21,7 @@ public class Usuario {
     private String nome;
     private String cpf;
     private int papel;
-    private int cadastro_aprovado;
+    private String cadastro_aprovado;
 
     public int getId() {
         return id;
@@ -66,27 +66,45 @@ public class Usuario {
     public int getPapel() {
         return papel;
     }
+    
+    public String getPapelNome(){
+        if(papel == 0) {
+            return "Administrador";
+        }
+        if(papel == 1) {
+            return "Autor";
+        }
+        if(papel == 2) {
+            return "Comentarista";
+        }
+        return "";
+    }
 
     public void setPapel(int papel) {
         this.papel = papel;
     }
 
-    public int getCadastro_aprovado() {
+    public String getCadastroAprovado() {
         return cadastro_aprovado;
     }
 
-    public void setCadastro_aprovado(int cadastro_aprovado) {
+    public void setCadastroAprovado(String cadastro_aprovado) {
         this.cadastro_aprovado = cadastro_aprovado;
     }
     
-    public ArrayList<Usuario> getListaUsuarios() throws SQLException{
+    public List<Usuario> getListaUsuarios() throws SQLException{
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        return usuarioDAO.getListaUsuarios();
+        return usuarioDAO.listarTodosUsuariosDAO();
     }
     
     public Usuario getUsuario(int usuario_id){
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.getUsuarioPorID(usuario_id);
+    }
+    
+    public Usuario getUsuarioPorLoginSenha(String cpf, String senha) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.getUsuarioPorLoginSenha(cpf, senha);
     }
         
 }
