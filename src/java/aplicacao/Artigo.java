@@ -75,6 +75,10 @@ public class Artigo {
     }
     
     public List<Artigo> listaTodosArtigos() {
-            return new ArtigoDAO().listarTodosArtigosDAO();
+        return new ArtigoDAO().listarTodosArtigosDAO();
+    }
+    
+    public boolean salvaArtigo(){
+        return new ArtigoDAO().salvarArtigo(this);
     }
 }

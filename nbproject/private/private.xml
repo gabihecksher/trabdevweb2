@@ -5,8 +5,12 @@
         <group>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/ListaArtigos.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/index.html</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/CriaArtigo.java</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/novo_artigo.jsp</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/list_article.jsp</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/head.html</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/add_article.html</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/navbar.html</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Aplicacao/Artigo.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/ProcessaCadastroUsuario.java</file>
@@ -15,6 +19,8 @@
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Model/CategoriaDAO.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/add_user.html</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Aplicacao/Usuario.java</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/form_artigo.jsp</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/ProcessaFormLogin.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Aplicacao/Categoria.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Model/UsuarioDAO.java</file>
         </group>
