@@ -53,11 +53,11 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="list_user.html">Perfil</a>
-                    <a class="dropdown-item" href="add_user.html">Logout</a>
+                    <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
             </li>
             <% } else{ %>
-            <li><a class="nav-link" href="login.html">Login <i class="fas fa-user"></i></a></li>
+            <li><a class="nav-link" href="<% response.sendRedirect("Logout"); %>">Login <i class="fas fa-user"></i></a></li>
             <% } %>
         </ul>
     </div>
