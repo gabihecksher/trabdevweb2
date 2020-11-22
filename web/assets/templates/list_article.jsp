@@ -1,5 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="Aplicacao.Artigo"%>
+<%@page import="Aplicacao.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -12,8 +13,13 @@
 
 	<body>	
             <jsp:include page="navbar.jsp" />
-            
-            <p>Usuário logado: <%= request.getAttribute("user") %></p>
+            <% 
+                Usuario user = null;
+                if (request.getSession().getAttribute("current_user") != null){
+                    user = (Usuario) request.getSession().getAttribute("current_user");
+                }
+            %>
+            <p>Usuário logado: <%= user %></p>
             <div class="container list-container">
 		<div class="list-page-title">
                     <h3>Artigos</h3>
