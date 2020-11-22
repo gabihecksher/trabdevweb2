@@ -117,9 +117,9 @@ public class UsuarioDAO {
     }
     
     public Usuario getUsuarioPorLoginSenha(String cpf, String senha) {
-        Usuario Contato = new Usuario();
+        Usuario usuario = new Usuario();
         try {
-            Contato.setId(0);
+            usuario.setId(0);
             
             String sql = "SELECT * FROM usuario WHERE cpf = ? and senha = ? limit 1";
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -131,10 +131,13 @@ public class UsuarioDAO {
             System.out.println("Senha: " + senha);
             
             if (rs.next()) {
-                System.out.println(rs.getInt("id"));
-                Contato.setId(rs.getInt("id"));
-                Contato.setNome(rs.getString("nome"));
-                Contato.setCpf(rs.getString("cpf"));
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setPapel(rs.getInt("papel"));
+                usuario.setCadastroAprovado(rs.getString("cadastro_aprovado"));
             }
             else {
                 return null;
@@ -143,7 +146,37 @@ public class UsuarioDAO {
         } catch (SQLException e) {
             System.out.println("Erro de SQL: " + e.getMessage());
         }
-        return Contato;
+        return usuario;
+    }
+
+    
+    public Usuario getUsuarioPorId(int id) {
+        Usuario usuario = new Usuario();
+        try {
+            usuario.setId(0);
+            
+            String sql = "SELECT * FROM usuario WHERE id = ? limit 1";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                usuario.setId(rs.getInt("id"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setPapel(rs.getInt("papel"));
+                usuario.setCadastroAprovado(rs.getString("cadastro_aprovado"));
+            }
+            else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+        return usuario;
     }
 
     public boolean gravar(Usuario usuario) {
@@ -188,6 +221,10 @@ public class UsuarioDAO {
             ps.setInt(1, usuario_id);
 
             ps.execute();
+            
+            Usuario usuario = new Usuario();
+            usuario = usuario.getUsuarioPorId(usuario_id);
+            usuario.setCadastroAprovado("S");
 
             return true;
         } catch (SQLException e) {

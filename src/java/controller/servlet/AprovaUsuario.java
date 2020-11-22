@@ -28,6 +28,7 @@ public class AprovaUsuario extends HttpServlet {
         int usuario_id = Integer.parseInt(request.getParameter("usuario_id"));
         Usuario usuario = new Usuario();
         usuario.aprovaUsuario(usuario_id);
+        usuario.setCadastroAprovado("S");
         RequestDispatcher rd = request.getRequestDispatcher("ListaUsuarios?modo_listagem=pendentes");
         rd.forward(request, response);
     }

@@ -9,7 +9,7 @@
         
     </head>
     <body>
-        <jsp:include page="navbar.html" />
+        <jsp:include page="navbar.jsp" />
         
         <div class="vertical-center">
             <div class="container col-md-4 col-md-offset-4">
@@ -32,7 +32,7 @@
                                         <!--<button type="submit" class="btn btn-default">Entrar</button>-->
                                         <input class="btn save-button" type="submit" value="Entrar"/>
                                     </div>
-                                    <a href="add_user.html">Não tem usuário? Cadastre-se aqui.</a>
+                                    <a href="CadastroUsuario">Não tem usuário? Cadastre-se aqui.</a>
                                 </form>
                             </div>  
                         </div>

@@ -62,12 +62,12 @@
                     <%= user.getNome() %> <i class="fas fa-user"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="list_user.html">Perfil</a>
+                    <a class="dropdown-item" href="CadastroUsuario">Perfil</a>
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
             </li>
             <% } else{ %>
-            <li><a class="nav-link" href="<% response.sendRedirect("Login"); %>">Login <i class="fas fa-user"></i></a></li>
+            <li><a class="nav-link" href="Login">Login <i class="fas fa-user"></i></a></li>
             <% } %>
         </ul>
     </div>

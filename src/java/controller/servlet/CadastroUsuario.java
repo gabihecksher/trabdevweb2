@@ -65,16 +65,6 @@ public class CadastroUsuario extends HttpServlet {
             String papel = request.getParameter("category");
             String senha = request.getParameter("password");
             String confirmacao_senha = request.getParameter("password_confirmation");
-            System.out.println("---------------------------");
-            System.out.println("---------------------------");
-            System.out.println("---------------------------");
-            System.out.println(nome);
-            System.out.println(email);
-            System.out.println(cpf);
-            System.out.println(papel);
-            System.out.println(senha);
-            System.out.println(confirmacao_senha);
-            /*
             if (nome.isEmpty()){
                 campo_obrigatorio_vazio = "nome";
             }
@@ -84,7 +74,7 @@ public class CadastroUsuario extends HttpServlet {
             else if (cpf.isEmpty()){
                 campo_obrigatorio_vazio = "CPF";
             }
-            else if (categoria.isEmpty()){
+            else if (papel.isEmpty()){
                 campo_obrigatorio_vazio = "Papel";
             }
             else if (senha.isEmpty()){
@@ -98,25 +88,25 @@ public class CadastroUsuario extends HttpServlet {
                 out.println("alert(" + "'Preencha o campo " + campo_obrigatorio_vazio + "'" + ");</script>");
                 out.println("</head><body></body></html>");
             }
-            if (senha != confirmacao_senha){
+            if (!senha.equals(confirmacao_senha)){
                 out.println("<script type='text/javascript'>");
                 out.println("alert(" + "'Preencha o campo " + campo_obrigatorio_vazio + "'" + ");</script>");
                 out.println("</head><body></body></html>");
             } 
-            else{*/
-            String stringSQL = "INSERT INTO Usuario (nome, email, cpf, papel, senha, cadastro_aprovado) VALUES(?,?,?,?,?,?)";
-            PreparedStatement sql = connection.prepareStatement(stringSQL);
-            sql.setString(1, nome);
-            sql.setString(2, email);
-            sql.setString(3, cpf);
-            sql.setInt(4, Integer.parseInt(papel));
-            sql.setString(5, senha);
-            sql.setString(6, "N");
-            System.out.println("vai executar o sql");
-            sql.executeUpdate();
-            System.out.println("foi!");
-            response.sendRedirect("ListaUsuarios");
-            //}
+            else{
+                String stringSQL = "INSERT INTO Usuario (nome, email, cpf, papel, senha, cadastro_aprovado) VALUES(?,?,?,?,?,?)";
+                PreparedStatement sql = connection.prepareStatement(stringSQL);
+                sql.setString(1, nome);
+                sql.setString(2, email);
+                sql.setString(3, cpf);
+                sql.setInt(4, Integer.parseInt(papel));
+                sql.setString(5, senha);
+                sql.setString(6, "N");
+                System.out.println("vai executar o sql");
+                sql.executeUpdate();
+                System.out.println("foi!");
+                response.sendRedirect("ListaUsuarios");
+            }
         } catch (SQLException ex) {
             System.out.println("Não foi possível conectar ao banco!");
         } finally {

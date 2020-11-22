@@ -109,6 +109,11 @@ public class Usuario {
         return usuarioDAO.getUsuarioPorID(usuario_id);
     }
     
+    public Usuario getUsuarioPorId(int id) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.getUsuarioPorId(id);
+    }
+    
     public Usuario getUsuarioPorLoginSenha(String cpf, String senha) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.getUsuarioPorLoginSenha(cpf, senha);
