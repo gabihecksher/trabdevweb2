@@ -6,7 +6,7 @@
         <jsp:include page="head.html" />
     </head>
     <body>
-        <jsp:include page="navbar.html" />
+        <jsp:include page="navbar.jsp" />
         
         <div class="vertical-center">
             <div class="container col-md-6 col-md-offset-6">

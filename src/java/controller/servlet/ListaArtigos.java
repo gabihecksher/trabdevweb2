@@ -57,10 +57,15 @@ public class ListaArtigos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //response.sendRedirect("assets/templates/list_article.html");
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        String modo_listagem = request.getParameter("modo_listagem");
         Artigo artigo = new Artigo();
-        List<Artigo> lista_artigos;
-        lista_artigos = artigo.listaTodosArtigos();
+        List<Artigo> lista_artigos = null;
+        if (modo_listagem.equals("pendentes")){
+            lista_artigos = artigo.listaArtigosPendentes();
+        }
+        if (modo_listagem.equals("publicados")){
+            lista_artigos = artigo.listaArtigosPublicados();
+        } 
         request.setAttribute("lista_artigos", lista_artigos);
         RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_article.jsp");
         rd.forward(request, response);

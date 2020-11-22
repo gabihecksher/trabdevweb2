@@ -77,4 +77,67 @@ public class ArtigoDAO {
             return false;
         }
     }
+    
+    public List<Artigo> listarArtigosPendentesDAO() {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Artigo> artigos = new ArrayList<>();
+        Artigo artigo = null;
+
+        try {
+            connection = new Conexao().criaConexao();
+            stmt = connection.prepareStatement("SELECT * FROM artigo WHERE aprovado='N'");
+            rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                artigo = new Artigo();
+                artigo.setId(rs.getInt("id"));
+                artigo.setTitulo(rs.getString("titulo"));
+                artigo.setConteudo(rs.getString("conteudo"));
+                artigo.setLiberar(rs.getString("liberar"));
+                artigo.setAprovado(rs.getString("aprovado"));
+                artigo.setUsuario(rs.getInt("id_usuario"));
+                artigo.setCategoria(rs.getInt("id_categoria"));
+
+                artigos.add(artigo);
+            }        	
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar artigos pendentes: " + e.getMessage());
+        }
+
+        return artigos;
+    }
+    
+    
+    public List<Artigo> listarArtigosPublicadosDAO() {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Artigo> artigos = new ArrayList<>();
+        Artigo artigo = null;
+
+        try {
+            connection = new Conexao().criaConexao();
+            stmt = connection.prepareStatement("SELECT * FROM artigo WHERE aprovado='S' and liberar='S'");
+            rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                artigo = new Artigo();
+                artigo.setId(rs.getInt("id"));
+                artigo.setTitulo(rs.getString("titulo"));
+                artigo.setConteudo(rs.getString("conteudo"));
+                artigo.setLiberar(rs.getString("liberar"));
+                artigo.setAprovado(rs.getString("aprovado"));
+                artigo.setUsuario(rs.getInt("id_usuario"));
+                artigo.setCategoria(rs.getInt("id_categoria"));
+
+                artigos.add(artigo);
+            }        	
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar artigos publicados: " + e.getMessage());
+        }
+
+        return artigos;
+    }
 }

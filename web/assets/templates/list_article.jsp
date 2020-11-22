@@ -18,8 +18,10 @@
 		<div class="list-page-title">
                     <h3>Artigos</h3>
 		</div>
-                <%
+                <%  
                     List<Artigo> ListaArtigo = (List<Artigo>) request.getAttribute("lista_artigos");
+                    System.out.println(ListaArtigo);
+                    if (ListaArtigo != null && ListaArtigo.size() > 0){
                     for (int i = 0; i < ListaArtigo.size(); i++) {
                         Artigo artigo = ListaArtigo.get(i);
                 %>
@@ -50,17 +52,24 @@
                             <%=artigo.getConteudo()%>
 			</div>
                     </div>
+                    
+                    <% 
+                        boolean artigosPendentes = "pendentes".equals(request.getParameter("modo_listagem"));
+                        if (artigosPendentes){ %>
                     <div class="card-footer horizontal-align-center">
 			<button class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></button>
 			<button class="button-reprove">Reprovar<i class="fas fa-thumbs-down"></i></button>
                     </div>
+                    <% } %>
+                    
 		</div>
-		<% } %>		
-
+		<% }} %>		
+                
+               
 		<div class="horizontal-align-center">
                     <a class="btn btn-primary button-approve" href="add_article.html" role="button">Adicionar<i class="fas fa-plus-square"></i></a>
 		</div>
-				
+			
             </div>
 	</body>
 </html>

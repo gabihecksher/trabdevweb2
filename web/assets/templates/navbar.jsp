@@ -14,9 +14,9 @@
                     Artigos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="list_article.html">Artigos publicados</a>
-                    <a class="dropdown-item" href="list_article.html">Artigos pendentes</a>
-                    <a class="dropdown-item" href="add_article.html">Criar artigo</a>
+                    <a class="dropdown-item" href="ListaArtigos?modo_listagem=publicados"">Artigos publicados</a>
+                    <a class="dropdown-item" href="ListaArtigos?modo_listagem=pendentes">Artigos pendentes</a>
+                    <a class="dropdown-item" href="CriaArtigo">Criar artigo</a>
                 </div>
             </li>
 
