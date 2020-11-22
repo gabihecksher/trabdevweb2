@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Artigos</title>
+        <title><%= request.getAttribute("titulo") %></title>
 
         <jsp:include page="head.html" />
     </head>
@@ -57,19 +57,19 @@
                         boolean artigosPendentes = "pendentes".equals(request.getParameter("modo_listagem"));
                         if (artigosPendentes){ %>
                     <div class="card-footer horizontal-align-center">
-			<button class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></button>
-			<button class="button-reprove">Reprovar<i class="fas fa-thumbs-down"></i></button>
+                        <a href="AprovaArtigo?artigo_id=<%=artigo.getId()%>"class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
                     </div>
                     <% } %>
                     
 		</div>
 		<% }} %>		
                 
-               
+                <% if("usuario".equals(request.getParameter("modo_listagem"))){ %>
 		<div class="horizontal-align-center">
-                    <a class="btn btn-primary button-approve" href="add_article.html" role="button">Adicionar<i class="fas fa-plus-square"></i></a>
+                    <a class="btn btn-primary button-approve" href="CriaArtigo" role="button">Adicionar<i class="fas fa-plus-square"></i></a>
 		</div>
-			
+                <% } %>
+                
             </div>
 	</body>
 </html>

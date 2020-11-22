@@ -140,4 +140,59 @@ public class ArtigoDAO {
 
         return artigos;
     }
+    
+    public boolean aprovaArtigo(int artigo_id) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        try {
+            connection = new Conexao().criaConexao();
+            String sql;
+            
+            sql = "UPDATE artigo SET aprovado='S' WHERE id=?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, artigo_id);
+
+            ps.execute();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public List<Artigo> listarArtigosPorUsuarioDAO(int usuario_id) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Artigo> artigos = new ArrayList<>();
+        Artigo artigo = null;
+
+        try {
+            connection = new Conexao().criaConexao();
+            stmt = connection.prepareStatement("SELECT * FROM artigo WHERE id_usuario=?");
+            stmt.setInt(1, usuario_id);
+            rs = stmt.executeQuery();
+
+            while(rs.next()) {
+                artigo = new Artigo();
+                artigo.setId(rs.getInt("id"));
+                artigo.setTitulo(rs.getString("titulo"));
+                artigo.setConteudo(rs.getString("conteudo"));
+                artigo.setLiberar(rs.getString("liberar"));
+                artigo.setAprovado(rs.getString("aprovado"));
+                artigo.setUsuario(rs.getInt("id_usuario"));
+                artigo.setCategoria(rs.getInt("id_categoria"));
+
+                artigos.add(artigo);
+            }        	
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar artigos pendentes: " + e.getMessage());
+        }
+
+        return artigos;
+    }
+    
+    
 }

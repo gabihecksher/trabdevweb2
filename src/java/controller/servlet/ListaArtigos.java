@@ -6,6 +6,7 @@
 package Controller.servlet;
 
 import Aplicacao.Artigo;
+import Aplicacao.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -55,18 +57,32 @@ public class ListaArtigos extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //response.sendRedirect("assets/templates/list_article.html");
+        HttpSession session = request.getSession();
+        Usuario usuario =  (Usuario) session.getAttribute("current_user");
+        int usuario_id = usuario.getId();
+      
         response.setContentType("text/html;charset=UTF-8");
-        String modo_listagem = request.getParameter("modo_listagem");
+        String modo_listagem = "publicados";
+        if (request.getParameter("modo_listagem") != null){
+            modo_listagem = request.getParameter("modo_listagem");
+        }
         Artigo artigo = new Artigo();
         List<Artigo> lista_artigos = null;
+        String titulo = "Artigos";
         if (modo_listagem.equals("pendentes")){
             lista_artigos = artigo.listaArtigosPendentes();
+            titulo = "Artigos pendentes";
         }
         if (modo_listagem.equals("publicados")){
             lista_artigos = artigo.listaArtigosPublicados();
+            titulo = "Artigos publicados";
+        }
+        if (modo_listagem.equals("usuario")){
+            lista_artigos = artigo.listaArtigosPorUsuario(usuario_id);
+            titulo = "Meus Artigos";
         } 
         request.setAttribute("lista_artigos", lista_artigos);
+        request.setAttribute("titulo", titulo);
         RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_article.jsp");
         rd.forward(request, response);
         

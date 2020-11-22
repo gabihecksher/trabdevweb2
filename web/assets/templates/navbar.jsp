@@ -16,6 +16,8 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="ListaArtigos?modo_listagem=publicados"">Artigos publicados</a>
                     <a class="dropdown-item" href="ListaArtigos?modo_listagem=pendentes">Artigos pendentes</a>
+                    <a class="dropdown-item" href="ListaArtigos?modo_listagem=usuario">Meus artigos</a>
+                    
                     <a class="dropdown-item" href="CriaArtigo">Criar artigo</a>
                 </div>
             </li>

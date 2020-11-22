@@ -84,9 +84,18 @@ public class Artigo {
     
     public List<Artigo> listaArtigosPublicados() {
         return new ArtigoDAO().listarArtigosPublicadosDAO();
-    }    
+    }
+    
+    public List<Artigo> listaArtigosPorUsuario(int usuario_id) {
+        return new ArtigoDAO().listarArtigosPorUsuarioDAO(usuario_id);
+    }
+    
     
     public boolean salvaArtigo(){
         return new ArtigoDAO().salvarArtigo(this);
+    }
+    
+    public boolean aprovaArtigo(int artigo_id){
+        return new ArtigoDAO().aprovaArtigo(artigo_id);
     }
 }
