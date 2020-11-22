@@ -97,6 +97,13 @@ public class Usuario {
         return usuarioDAO.listarTodosUsuariosDAO();
     }
     
+    public List<Usuario> getListaUsuariosPorStatus(boolean aprovado) throws SQLException{
+        System.out.println("procura usuarios" + aprovado);
+            
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.getListaUsuariosPorStatus(aprovado);
+    }
+    
     public Usuario getUsuario(int usuario_id){
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.getUsuarioPorID(usuario_id);
@@ -105,6 +112,11 @@ public class Usuario {
     public Usuario getUsuarioPorLoginSenha(String cpf, String senha) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.getUsuarioPorLoginSenha(cpf, senha);
+    }
+    
+    public boolean aprovaUsuario(int usuario_id) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.aprovaUsuario(usuario_id);
     }
         
 }

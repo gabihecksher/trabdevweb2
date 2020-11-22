@@ -56,6 +56,43 @@ public class UsuarioDAO {
         return usuarios;
     }
 
+    public List<Usuario> getListaUsuariosPorStatus(boolean aprovado) {
+        System.out.println("procura usuarios" + aprovado);
+            
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Usuario> usuarios = new ArrayList<>();
+        Usuario usuario = null;
+
+        try {
+            connection = new Conexao().criaConexao();
+            stmt = connection.prepareStatement("SELECT * FROM usuario WHERE cadastro_aprovado = \"N\"");
+            if(aprovado){
+                stmt = connection.prepareStatement("SELECT * FROM usuario WHERE cadastro_aprovado = 'S'");
+            }
+            rs = stmt.executeQuery();
+            System.out.println("usuarios:" + rs);
+            
+            while(rs.next()) {
+                usuario = new Usuario();
+                usuario.setId(rs.getInt("id"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setCpf(rs.getString("cpf"));
+                usuario.setPapel(rs.getInt("papel"));
+                usuario.setCadastroAprovado(rs.getString("cadastro_aprovado"));
+                
+                usuarios.add(usuario);
+            }        	
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar todos os usuarios: " + e.getMessage());
+        }
+
+        return usuarios;
+    }
+
     public Usuario getUsuarioPorID(int id) {
         Usuario usuario = new Usuario();
         try {
@@ -137,6 +174,29 @@ public class UsuarioDAO {
             return false;
         }
     }
+    
+    public boolean aprovaUsuario(int usuario_id) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        try {
+            connection = new Conexao().criaConexao();
+            String sql;
+            
+            sql = "UPDATE usuario SET cadastro_aprovado='S' WHERE id=?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, usuario_id);
+
+            ps.execute();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    
 
     public boolean excluir(int id) {
         try {

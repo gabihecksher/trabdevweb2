@@ -45,12 +45,31 @@ public class ListaUsuarios extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try{
+            String titulo = "Usuários";
+            String modo_listagem = "aprovados";
             Usuario usuario = new Usuario();
-            List<Usuario> lista_usuarios;
-            lista_usuarios = usuario.getListaUsuarios();
+            List<Usuario> lista_usuarios = null;
+            System.out.println("procura usuarios" + request.getParameter("modo_listagem"));
+            if (request.getParameter("modo_listagem") != null){
+                modo_listagem = request.getParameter("modo_listagem");
+            }
+            if (modo_listagem.equals("pendentes")){
+                lista_usuarios = usuario.getListaUsuariosPorStatus(false);
+                titulo = "Usuários pendentes";
+            }
+            else if (modo_listagem.equals("aprovados")){
+                lista_usuarios = usuario.getListaUsuariosPorStatus(true);
+                titulo = "Usuários aprovados";
+            }
+            System.out.println("achou usuarios" + request.getParameter("modo_listagem"));
+            
             request.setAttribute("lista_usuarios", lista_usuarios);
+            System.out.println("usuarios:" + lista_usuarios);
+            
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_user.jsp");
             rd.forward(request, response);
+            System.out.println("foi");
+            
         }  catch (SQLException ex) {
             System.out.println("Não foi possível conectar ao banco!");
             ex.printStackTrace();

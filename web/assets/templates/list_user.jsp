@@ -10,7 +10,7 @@
     </head>
 
 	<body>
-            <jsp:include page="navbar.html" />
+            <jsp:include page="navbar.jsp" />
             <div class="container list-container">
 		<div class="list-page-title">
                     <h3>Usuários</h3>
@@ -52,6 +52,15 @@
 			</p>
 
                     </div>
+                    <% 
+                        boolean usuariosPendentes = "pendentes".equals(request.getParameter("modo_listagem"));
+                        if (usuariosPendentes){ 
+                    %>
+                    <div class="card-footer horizontal-align-center">
+                        <a href="AprovaUsuario?usuario_id=<%=usuario.getId()%>"class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
+                    </div>
+                    <% } %>
+                    
                     <div class="card-footer horizontal-align-center">
 			<button class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></button>
 			<button class="button-reprove">Reprovar<i class="fas fa-thumbs-down"></i></button>

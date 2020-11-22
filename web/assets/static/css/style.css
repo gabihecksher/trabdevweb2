@@ -216,7 +216,17 @@ a:hover {
 }
 
 .button-approve:hover{
-	background-color: #4caf509c;
+    background-color: #4caf509c;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    color: #fafafa;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+    margin: 5px;
+    width: auto;
+    height: auto;
 }
 
 .button-reprove:hover{

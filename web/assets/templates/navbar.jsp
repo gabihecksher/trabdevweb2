@@ -46,7 +46,8 @@
                     Usuários
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="list_user.html">Usuários pendentes</a>
+                    <a class="dropdown-item" href="ListaUsuarios?modo_listagem=pendentes">Usuários pendentes</a>
+                    <a class="dropdown-item" href="ListaUsuarios?modo_listagem=aprovados">Usuários aprovados</a>
                     <a class="dropdown-item" href="add_user.html">Criar usuário</a>
                 </div>
             </li>

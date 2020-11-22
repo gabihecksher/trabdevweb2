@@ -59,9 +59,7 @@ public class ListaArtigos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario usuario =  (Usuario) session.getAttribute("current_user");
-        System.out.println("GET LISTA ARTIGO: " + usuario);
         int usuario_id = usuario.getId();
-        System.out.println("id: " + usuario_id);
         
         response.setContentType("text/html;charset=UTF-8");
         String modo_listagem = "publicados";
