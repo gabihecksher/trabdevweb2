@@ -62,7 +62,7 @@
                     <%= user.getNome() %> <i class="fas fa-user"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="CadastroUsuario">Perfil</a>
+                    <a class="dropdown-item" href="EditaUsuario">Perfil</a>
                     <a class="dropdown-item" href="Logout">Logout</a>
                 </div>
             </li>

@@ -23,20 +23,63 @@
                 <div class="row content justify-content-md-center">
                     <div class="col-12">
                         <div class="page-title">
-                            <h3>Cadastrar usuário</h3>
+                            <% 
+                                if (user != null){
+                            %>
+                                <h3>Editar usuário</h3>
+                            <% 
+                                } else{
+                            %>
+                                <h3>Cadastrar usuário</h3>
+                            <% 
+                                }
+                            %>
                         </div>
                     </div>
                     <div id="errors"></div>
                     <div class="col-8">
                         <form class="form" method="post" action="http://localhost:8080/AlphaBlog/CadastroUsuario">
                             <div class="form-group row">
-                                <input type="text" class="form-control form-control-md" placeholder="Nome" name="full_name">
+                                <% 
+                                    if (user != null){
+                                %>
+                                    <input type="text" class="form-control form-control-md" value="<%= user.getNome() %>" name="full_name">
+                                <%
+                                    }
+                                    else {
+                                %>
+                                    <input type="text" class="form-control form-control-md" placeholder="Nome" name="full_name">
+                                <% 
+                                    }
+                                %>
                             </div>
                             <div class="form-group row">
-                                <input type="email" class="form-control form-control-md" name="email" placeholder="E-mail">                                
+                                <% 
+                                    if (user != null){
+                                %>
+                                    <input type="email" class="form-control form-control-md" name="email" value="<%= user.getEmail() %>" >
+                                <%
+                                    }
+                                    else {
+                                %>
+                                    <input type="email" class="form-control form-control-md" name="email" placeholder="E-mail">
+                                <% 
+                                    }
+                                %>                                
                             </div>
                             <div class="form-group row">
-                                <input type="text" class="form-control form-control-md" name="legal_id" placeholder="CPF">
+                                <% 
+                                    if (user != null){
+                                %>
+                                    <input type="text" class="form-control form-control-md" name="legal_id"  value="<%= user.getCpf() %>" >
+                                <%
+                                    }
+                                    else {
+                                %>
+                                    <input type="text" class="form-control form-control-md" name="legal_id" placeholder="CPF">
+                                <% 
+                                    }
+                                %>
                             </div>
                             <div class="form-group row">
                                 <select name="category" class="form-control form-control-md">
@@ -63,4 +106,5 @@
         </div>
     </body>
 </html>
+
 

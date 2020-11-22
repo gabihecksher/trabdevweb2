@@ -19,7 +19,6 @@
                     user = (Usuario) request.getSession().getAttribute("current_user");
                 }
             %>
-            <p>Usuário logado: <%= user %></p>
             <div class="container list-container">
 		<div class="list-page-title">
                     <h3>Artigos</h3>
@@ -61,7 +60,7 @@
                     
                     <% 
                         boolean artigosPendentes = "pendentes".equals(request.getParameter("modo_listagem"));
-                        if (artigosPendentes){ %>
+                        if (artigosPendentes && user.getPapel() == 0){ %>
                     <div class="card-footer horizontal-align-center">
                         <a href="AprovaArtigo?artigo_id=<%=artigo.getId()%>"class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
                     </div>
@@ -70,9 +69,9 @@
                     <% 
                         boolean artigosUsuario = "usuario".equals(request.getParameter("modo_listagem"));
                         boolean podeLiberar = "N".equals(artigo.getLiberar());
-                        if (artigosUsuario && podeLiberar){ %>
+                        if (artigosUsuario && podeLiberar && user.getPapel() == 1){ %>
                     <div class="card-footer horizontal-align-center">
-                        <a href="LiberaArtigo?artigo_id=<%=artigo.getId()%>"class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
+                        <a href="LiberaArtigo?artigo_id=<%=artigo.getId()%>"class="button-approve">Liberar para publicação<i class="fas fa-thumbs-up"></i></a>
                     </div>
                     <% } %>
                     

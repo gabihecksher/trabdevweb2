@@ -74,7 +74,7 @@ public class ListaArtigos extends HttpServlet {
         }
         else{
             if (modo_listagem.equals("pendentes")){
-                if (current_user != null && current_user.getPapel() == 0){
+                if (current_user != null && (current_user.getPapel() == 0 || current_user.getPapel() == 1)){
                     lista_artigos = artigo.listaArtigosPendentes();
                     titulo = "Artigos pendentes";
                 }
