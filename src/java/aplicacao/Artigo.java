@@ -98,4 +98,8 @@ public class Artigo {
     public boolean aprovaArtigo(int artigo_id){
         return new ArtigoDAO().aprovaArtigo(artigo_id);
     }
+    
+    public boolean liberaArtigo(int artigo_id){
+        return new ArtigoDAO().liberaArtigo(artigo_id);
+    }
 }

@@ -61,6 +61,15 @@
                     </div>
                     <% } %>
                     
+                    <% 
+                        boolean artigosUsuario = "usuario".equals(request.getParameter("modo_listagem"));
+                        boolean podeLiberar = "N".equals(artigo.getLiberar());
+                        if (artigosUsuario && podeLiberar){ %>
+                    <div class="card-footer horizontal-align-center">
+                        <a href="LiberaArtigo?artigo_id=<%=artigo.getId()%>"class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
+                    </div>
+                    <% } %>
+                    
 		</div>
 		<% }} %>		
                 

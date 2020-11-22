@@ -161,6 +161,27 @@ public class ArtigoDAO {
             return false;
         }
     }
+    
+    public boolean liberaArtigo(int artigo_id) {
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        try {
+            connection = new Conexao().criaConexao();
+            String sql;
+            
+            sql = "UPDATE artigo SET liberar='S' WHERE id=?";
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, artigo_id);
+
+            ps.execute();
+
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return false;
+        }
+    }
 
     public List<Artigo> listarArtigosPorUsuarioDAO(int usuario_id) {
         Connection connection = null;
