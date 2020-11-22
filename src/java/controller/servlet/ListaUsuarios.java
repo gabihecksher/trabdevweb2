@@ -24,23 +24,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "ListaUsuarios", urlPatterns = {"/ListaUsuarios"})
 public class ListaUsuarios extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ListaUsuarios</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ListaUsuarios at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -60,6 +43,7 @@ public class ListaUsuarios extends HttpServlet {
                 if(current_user != null && current_user.getPapel() == 0){
                     lista_usuarios = usuario.getListaUsuariosPorStatus(false);
                     titulo = "Usuários pendentes";
+                    request.setAttribute("titulo", titulo);
                 }
                 else{
                     request.setAttribute("error_message", "Apenas usuários do tipo \"Administrador\" podem acessar essa tela.");
@@ -70,6 +54,7 @@ public class ListaUsuarios extends HttpServlet {
             else if (modo_listagem.equals("aprovados")){
                 lista_usuarios = usuario.getListaUsuariosPorStatus(true);
                 titulo = "Usuários aprovados";
+                request.setAttribute("titulo", titulo);
             }
             request.setAttribute("lista_usuarios", lista_usuarios);
             
@@ -86,7 +71,28 @@ public class ListaUsuarios extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        try{
+            Usuario current_user =  (Usuario) session.getAttribute("current_user");
+            if (current_user != null){
+                Usuario usuario = new Usuario();
+                List<Usuario> lista_usuarios = null;
+                lista_usuarios = usuario.getListaUsuariosPorStatus(true);
+                request.setAttribute("lista_usuarios", lista_usuarios);
+                String titulo = "Usuários aprovados";
+                request.setAttribute("titulo", titulo);
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_user.jsp");
+                rd.forward(request, response);
+            }
+            else {
+                response.sendRedirect("Login");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Não foi possível conectar ao banco!");
+            ex.printStackTrace();
+        }
     }
 
 

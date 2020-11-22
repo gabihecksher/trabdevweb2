@@ -21,7 +21,7 @@
             <jsp:include page="navbar.jsp" />
             <div class="container list-container">
 		<div class="list-page-title">
-                    <h3>Usuários</h3>
+                    <h3><%= request.getAttribute("titulo") %></h3>
 		</div>
 			
 		<%
