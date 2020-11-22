@@ -58,8 +58,7 @@ public class ListaArtigos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Usuario usuario =  (Usuario) session.getAttribute("current_user");
-        int usuario_id = usuario.getId();
+        Usuario current_user =  (Usuario) session.getAttribute("current_user");
         
         response.setContentType("text/html;charset=UTF-8");
         String modo_listagem = "publicados";
@@ -69,18 +68,35 @@ public class ListaArtigos extends HttpServlet {
         Artigo artigo = new Artigo();
         List<Artigo> lista_artigos = null;
         String titulo = "Artigos";
-        if (modo_listagem.equals("pendentes")){
-            lista_artigos = artigo.listaArtigosPendentes();
-            titulo = "Artigos pendentes";
-        }
         if (modo_listagem.equals("publicados")){
             lista_artigos = artigo.listaArtigosPublicados();
             titulo = "Artigos publicados";
         }
-        if (modo_listagem.equals("usuario")){
-            lista_artigos = artigo.listaArtigosPorUsuario(usuario_id);
-            titulo = "Meus Artigos";
-        } 
+        else{
+            if (modo_listagem.equals("pendentes")){
+                if (current_user != null && current_user.getPapel() == 0){
+                    lista_artigos = artigo.listaArtigosPendentes();
+                    titulo = "Artigos pendentes";
+                }
+                else {
+                    request.setAttribute("error_message", "Apenas usuários do tipo \"Administrador\" podem acessar essa tela.");
+                    RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                    rd.forward(request, response);
+                }
+            }
+            if (modo_listagem.equals("usuario")){
+                if (current_user != null && current_user.getPapel() == 1){
+                    int current_user_id = current_user.getId();
+                    lista_artigos = artigo.listaArtigosPorUsuario(current_user_id);
+                    titulo = "Meus Artigos";
+                }
+                else {
+                    request.setAttribute("error_message", "Apenas usuários do tipo \"Autor\" podem acessar essa tela.");
+                    RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                    rd.forward(request, response);
+                }
+            }
+        }
         request.setAttribute("lista_artigos", lista_artigos);
         request.setAttribute("titulo", titulo);
         RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_article.jsp");

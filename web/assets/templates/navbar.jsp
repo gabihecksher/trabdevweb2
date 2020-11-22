@@ -34,10 +34,10 @@
                     Categorias
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="list_article.html">Artes</a>
-                    <a class="dropdown-item" href="list_article.html">Política</a>
-                    <a class="dropdown-item" href="list_article.html">Ficção</a>
-                    <a class="dropdown-item" href="add_category.html">Criar categoria</a>
+                    <a class="dropdown-item" href="ListaArtigos?modo_listagem=publicados">Artes</a>
+                    <a class="dropdown-item" href="ListaArtigos?modo_listagem=publicados">Política</a>
+                    <a class="dropdown-item" href="ListaArtigos?modo_listagem=publicados">Ficção</a>
+                    <a class="dropdown-item" href="assets/templates/add_category.html">Criar categoria</a>
                 </div>
             </li>
 
@@ -48,7 +48,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="ListaUsuarios?modo_listagem=pendentes">Usuários pendentes</a>
                     <a class="dropdown-item" href="ListaUsuarios?modo_listagem=aprovados">Usuários aprovados</a>
-                    <a class="dropdown-item" href="add_user.html">Criar usuário</a>
+                    <a class="dropdown-item" href="CadastroUsuario">Criar usuário</a>
                 </div>
             </li>
         </ul>

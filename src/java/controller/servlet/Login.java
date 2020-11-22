@@ -37,39 +37,48 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        String cpf_user = request.getParameter("legal_id");
-        String senha_user = request.getParameter("password");
-        
-        if (cpf_user.isEmpty()){
-            request.setAttribute("error_message", "Por favor preencha o campo de CPF.");
-            RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
-            rd.forward(request, response);
-        }
-        else if (senha_user.isEmpty()){
-            request.setAttribute("error_message", "Por favor preencha o campo de senha.");
-            RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
-            rd.forward(request, response);
-        }
-        Usuario user = new Usuario();
-        user = user.getUsuarioPorLoginSenha(cpf_user, senha_user);
-        if (user != null && user.getCadastroAprovado().equals("S")){
-            HttpSession session = request.getSession();
-            session.setAttribute("NomeUsuarioLogado", user.getNome());
-            session.setAttribute("current_user", user);
-            session.setAttribute("SessaoAtiva", true);
-            
-            request.setAttribute("user", session.getAttribute("NomeUsuarioLogado"));
-            System.out.println("Nome da sessão: " + session.getAttribute("NomeUsuarioLogado"));
-            RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
-            rd.forward(request, response);
-        } 
-        else if (user != null){
-            request.setAttribute("error_message", "Usuário pendente de aprovação.");
-            RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
-            rd.forward(request, response);
-        }
-        else {
-            request.setAttribute("error_message", "CPF ou senha incorretos.");
+        HttpSession current_session = request.getSession();
+        Usuario current_user =  (Usuario) current_session.getAttribute("current_user");
+        if (current_user == null){
+
+            String cpf_user = request.getParameter("legal_id");
+            String senha_user = request.getParameter("password");
+
+            if (cpf_user.isEmpty()){
+                request.setAttribute("error_message", "Por favor preencha o campo de CPF.");
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                rd.forward(request, response);
+            }
+            else if (senha_user.isEmpty()){
+                request.setAttribute("error_message", "Por favor preencha o campo de senha.");
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                rd.forward(request, response);
+            }
+            Usuario user = new Usuario();
+            user = user.getUsuarioPorLoginSenha(cpf_user, senha_user);
+            if (user != null && user.getCadastroAprovado().equals("S")){
+                HttpSession session = request.getSession();
+                session.setAttribute("NomeUsuarioLogado", user.getNome());
+                session.setAttribute("current_user", user);
+                session.setAttribute("SessaoAtiva", true);
+
+                request.setAttribute("user", session.getAttribute("NomeUsuarioLogado"));
+                System.out.println("Nome da sessão: " + session.getAttribute("NomeUsuarioLogado"));
+                RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
+                rd.forward(request, response);
+            } 
+            else if (user != null){
+                request.setAttribute("error_message", "Usuário pendente de aprovação.");
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                rd.forward(request, response);
+            }
+            else {
+                request.setAttribute("error_message", "CPF ou senha incorretos.");
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                rd.forward(request, response);
+            }
+        } else {
+            request.setAttribute("error_message", "Você já está logado.");
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
             rd.forward(request, response);
         }

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -45,6 +46,8 @@ public class ListaUsuarios extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try{
+            HttpSession session = request.getSession();
+            Usuario current_user =  (Usuario) session.getAttribute("current_user");
             String titulo = "Usuários";
             String modo_listagem = "aprovados";
             Usuario usuario = new Usuario();
@@ -54,22 +57,24 @@ public class ListaUsuarios extends HttpServlet {
                 modo_listagem = request.getParameter("modo_listagem");
             }
             if (modo_listagem.equals("pendentes")){
-                lista_usuarios = usuario.getListaUsuariosPorStatus(false);
-                titulo = "Usuários pendentes";
+                if(current_user != null && current_user.getPapel() == 0){
+                    lista_usuarios = usuario.getListaUsuariosPorStatus(false);
+                    titulo = "Usuários pendentes";
+                }
+                else{
+                    request.setAttribute("error_message", "Apenas usuários do tipo \"Administrador\" podem acessar essa tela.");
+                    RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                    rd.forward(request, response);
+                }
             }
             else if (modo_listagem.equals("aprovados")){
                 lista_usuarios = usuario.getListaUsuariosPorStatus(true);
                 titulo = "Usuários aprovados";
             }
-            System.out.println("achou usuarios" + request.getParameter("modo_listagem"));
-            
             request.setAttribute("lista_usuarios", lista_usuarios);
-            System.out.println("usuarios:" + lista_usuarios);
             
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_user.jsp");
             rd.forward(request, response);
-            System.out.println("foi");
-            
         }  catch (SQLException ex) {
             System.out.println("Não foi possível conectar ao banco!");
             ex.printStackTrace();

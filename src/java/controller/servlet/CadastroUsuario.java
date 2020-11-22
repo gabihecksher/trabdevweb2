@@ -84,14 +84,14 @@ public class CadastroUsuario extends HttpServlet {
                 campo_obrigatorio_vazio = "Confirmação de senha";
             }
             if (!campo_obrigatorio_vazio.isEmpty()){
-                out.println("<script type='text/javascript'>");
-                out.println("alert(" + "'Preencha o campo " + campo_obrigatorio_vazio + "'" + ");</script>");
-                out.println("</head><body></body></html>");
+                request.setAttribute("error_message", "Preencha o campo obrigatório " + campo_obrigatorio_vazio + ".");
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                rd.forward(request, response);
             }
             if (!senha.equals(confirmacao_senha)){
-                out.println("<script type='text/javascript'>");
-                out.println("alert(" + "'Preencha o campo " + campo_obrigatorio_vazio + "'" + ");</script>");
-                out.println("</head><body></body></html>");
+                request.setAttribute("error_message", "A senha e a confirmação da senha não estão iguais.");
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                rd.forward(request, response);
             } 
             else{
                 String stringSQL = "INSERT INTO Usuario (nome, email, cpf, papel, senha, cadastro_aprovado) VALUES(?,?,?,?,?,?)";

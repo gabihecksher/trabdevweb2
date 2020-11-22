@@ -2,6 +2,14 @@
 <%@page import="Aplicacao.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+
+<% 
+    Usuario user = null;
+    if (request.getSession().getAttribute("current_user") != null){
+        user = (Usuario) request.getSession().getAttribute("current_user");
+    }
+%>
+
 <html>
     <head>
         <title>Usuários</title> 
@@ -54,21 +62,24 @@
                     </div>
                     <% 
                         boolean usuariosPendentes = "pendentes".equals(request.getParameter("modo_listagem"));
-                        if (usuariosPendentes){ 
+                        if (user != null && user.getPapel() == 0 && usuariosPendentes){ 
                     %>
-                    <div class="card-footer horizontal-align-center">
-                        <a href="AprovaUsuario?usuario_id=<%=usuario.getId()%>"class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
-                    </div>
+                        <div class="card-footer horizontal-align-center">
+                            <a href="AprovaUsuario?usuario_id=<%=usuario.getId()%>"class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
+                        </div>
                     <% } %>
-                    
-                    <div class="card-footer horizontal-align-center">
-			<button class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></button>
-			<button class="button-reprove">Reprovar<i class="fas fa-thumbs-down"></i></button>
-                    </div>
+                    <% 
+                        boolean usuariosAprovados = "aprovados".equals(request.getParameter("modo_listagem"));
+                        if (user != null && user.getPapel() == 0 && usuariosAprovados){ 
+                    %>
+                        <div class="card-footer horizontal-align-center">
+                            <a href="ReprovaUsuario?usuario_id=<%=usuario.getId()%>"class="button-reprove">Reprovar<i class="fas fa-thumbs-down"></i></a>
+                        </div>
+                    <% } %>
                 </div>
 		<% } %>		
 		<div class="horizontal-align-center">
-                    <a class="btn btn-primary button-approve" href="add_user.html" role="button">Adicionar<i class="fas fa-plus-square"></i></a>
+                    <a class="btn btn-primary button-approve" href="CadastroUsuario" role="button">Adicionar<i class="fas fa-plus-square"></i></a>
 		</div>
 				
             </div>	

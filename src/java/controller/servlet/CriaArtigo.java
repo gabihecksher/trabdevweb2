@@ -46,9 +46,16 @@ public class CriaArtigo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("assets/templates/novo_artigo.jsp");
-        rd.forward(request, response);
-        
+        HttpSession session = request.getSession();
+        Usuario current_user =  (Usuario) session.getAttribute("current_user");
+        if (current_user != null && current_user.getPapel() == 1){
+            RequestDispatcher rd = request.getRequestDispatcher("assets/templates/novo_artigo.jsp");
+            rd.forward(request, response);
+        } else {
+            request.setAttribute("error_message", "Apenas usuários do tipo \"Autor\" podem acessar essa tela.");
+            RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+            rd.forward(request, response);
+        }
     }
 
     /**
@@ -63,30 +70,36 @@ public class CriaArtigo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Usuario usuario =  (Usuario) session.getAttribute("current_user");
-        int usuario_id = usuario.getId();
-        int categoria_id = Integer.parseInt(request.getParameter("categoria_id"));
-        String titulo = request.getParameter("titulo");
-        String aprovado = "N";
-        String liberar = Boolean.parseBoolean(request.getParameter("liberar")) ? "S" : "N";
-        System.out.println(request.getParameter("liberar"));
-        String conteudo = request.getParameter("conteudo");
+        Usuario current_user =  (Usuario) session.getAttribute("current_user");
+        if (current_user != null && current_user.getPapel() == 1){
+            int current_user_id = current_user.getId();
+            int categoria_id = Integer.parseInt(request.getParameter("categoria_id"));
+            String titulo = request.getParameter("titulo");
+            String aprovado = "N";
+            String liberar = Boolean.parseBoolean(request.getParameter("liberar")) ? "S" : "N";
+            System.out.println(request.getParameter("liberar"));
+            String conteudo = request.getParameter("conteudo");
 
-        Artigo artigo = new Artigo();
-        artigo.setUsuario(usuario_id);
-        artigo.setCategoria(categoria_id);
-        artigo.setTitulo(titulo);
-        artigo.setConteudo(conteudo);
-        artigo.setLiberar(liberar);
-        artigo.setAprovado(aprovado);
+            Artigo artigo = new Artigo();
+            artigo.setUsuario(current_user_id);
+            artigo.setCategoria(categoria_id);
+            artigo.setTitulo(titulo);
+            artigo.setConteudo(conteudo);
+            artigo.setLiberar(liberar);
+            artigo.setAprovado(aprovado);
 
-        boolean sucesso = artigo.salvaArtigo();
-        if (sucesso){
-            RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
-            rd.forward(request, response);
-        }
-        else{
-            RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
+            boolean sucesso = artigo.salvaArtigo();
+            if (sucesso){
+                RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
+                rd.forward(request, response);
+            }
+            else{
+                RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
+                rd.forward(request, response);
+            }
+        } else {
+            request.setAttribute("error_message", "Apenas usuários do tipo \"Autor\" podem acessar essa tela.");
+            RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
             rd.forward(request, response);
         }
     }
