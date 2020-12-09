@@ -132,6 +132,7 @@ public class ComentarioDAO {
                 ps.setInt(4, comentario.getId());
             }
 
+            System.out.println(ps);
             ps.execute();
 
             return true;
