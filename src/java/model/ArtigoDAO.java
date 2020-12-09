@@ -87,7 +87,7 @@ public class ArtigoDAO {
 
         try {
             connection = new Conexao().criaConexao();
-            stmt = connection.prepareStatement("SELECT * FROM artigo WHERE aprovado='N'");
+            stmt = connection.prepareStatement("SELECT * FROM artigo WHERE aprovado='N' and liberar='S'");
             rs = stmt.executeQuery();
 
             while(rs.next()) {
@@ -141,17 +141,18 @@ public class ArtigoDAO {
         return artigos;
     }
     
-    public boolean aprovaArtigo(int artigo_id) {
+    public boolean aprovaArtigo(int artigo_id, String aprovado) {
         Connection connection = null;
         PreparedStatement stmt = null;
         try {
             connection = new Conexao().criaConexao();
             String sql;
             
-            sql = "UPDATE artigo SET aprovado='S' WHERE id=?";
+            sql = "UPDATE artigo SET aprovado=? WHERE id=?";
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, artigo_id);
+            ps.setString(1, aprovado);
+            ps.setInt(2, artigo_id);
 
             ps.execute();
 
@@ -246,6 +247,21 @@ public class ArtigoDAO {
         return artigo;
     }
     
+    public boolean excluirArtigo(int artigo_id) {
+        Connection connection = null;
+        try {
+            connection = new Conexao().criaConexao();
+
+            String sql = "DELETE FROM artigo WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, artigo_id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return false;
+        }
+    }
     
     
 }

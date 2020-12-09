@@ -95,8 +95,8 @@ public class Artigo {
         return new ArtigoDAO().salvarArtigo(this);
     }
     
-    public boolean aprovaArtigo(int artigo_id){
-        return new ArtigoDAO().aprovaArtigo(artigo_id);
+    public boolean aprovaArtigo(int artigo_id, String aprovado){
+        return new ArtigoDAO().aprovaArtigo(artigo_id, aprovado);
     }
     
     public boolean liberaArtigo(int artigo_id){
@@ -107,5 +107,9 @@ public class Artigo {
         System.out.println(artigo_id);
         ArtigoDAO artigoDAO = new ArtigoDAO();
         return artigoDAO.getArtigoPorID(artigo_id);
+    }
+    
+    public boolean excluirArtigo(int artigo_id){
+        return new ArtigoDAO().excluirArtigo(artigo_id);
     }
 }

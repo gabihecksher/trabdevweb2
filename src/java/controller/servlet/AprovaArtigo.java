@@ -24,8 +24,14 @@ public class AprovaArtigo extends HttpServlet {
         if (current_user != null && current_user.getPapel() == 0){
             response.setContentType("text/html;charset=UTF-8");
             int artigo_id = Integer.parseInt(request.getParameter("artigo_id"));
+            String aprovado = request.getParameter("aprovado");
             Artigo artigo = new Artigo();
-            artigo.aprovaArtigo(artigo_id);
+            if (aprovado.equals("N")){
+                artigo.excluirArtigo(artigo_id);
+            }
+            else{
+                artigo.aprovaArtigo(artigo_id, aprovado);
+            }
             RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos?modo_listagem=pendentes");
             rd.forward(request, response);
         }

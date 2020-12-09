@@ -125,7 +125,8 @@
                                 if (artigosPendentes && user.getPapel() == 0){ 
                             %>
                                     <div class="card-footer horizontal-align-center">
-                                        <a href="AprovaArtigo?artigo_id=<%=artigo.getId()%>"class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
+                                        <a href="AprovaArtigo?artigo_id=<%=artigo.getId()%>&aprovado=S" class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
+                                        <a href="AprovaArtigo?artigo_id=<%=artigo.getId()%>&aprovado=N" class="button-reprove">Reprovar<i class="fas fa-thumbs-down"></i></a>
                                     </div>
                             <% 
                                 }
