@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="Aplicacao.Artigo"%>
 <%@page import="Aplicacao.Usuario"%>
+<%@page import="Aplicacao.Comentario"%>"
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -25,7 +26,6 @@
 		</div>
                 <%  
                     List<Artigo> ListaArtigo = (List<Artigo>) request.getAttribute("lista_artigos");
-                    System.out.println(ListaArtigo);
                     if (ListaArtigo != null && ListaArtigo.size() > 0){
                     for (int i = 0; i < ListaArtigo.size(); i++) {
                         Artigo artigo = ListaArtigo.get(i);
@@ -58,6 +58,71 @@
 			</div>
                     </div>
                     
+                    <div class="card-footer">
+                        <div class="comment-section">
+                                Comentários
+                            <%  
+                                List<Comentario> ListaComentario = (List<Comentario>) request.getAttribute("lista_comentarios");
+                                System.out.println(ListaComentario);
+                                if (ListaComentario != null && ListaComentario.size() > 0){
+                                    for (int j = 0; j < ListaComentario.size(); j++) {
+                                        Comentario comentario = ListaComentario.get(j);
+                                        if (comentario.getArtigo().getId() == artigo.getId()){
+                            %>
+                                            <div class="comment">
+                                                <div class="comment-head">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <i class="fas fa-user"></i>
+                                                            <%= comentario.getUsuario().getNome() %>
+                                                        </div>
+                                                        <% 
+                                                            if (user != null && comentario.getUsuario().getId() == user.getId()){
+                                                                
+                                                        %>
+                                                                <div class="col-md-2">
+                                                                    <button class="button-edit btn btn-warning">Editar <i class="fas fa-edit"></i></button>
+                                                                    <button class="button-delete btn btn-danger">Excluir <i class="fas fa-trash-alt"></i></button>
+                                                                </div>
+                                                        <%
+                                                            }
+                                                        %>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="comment-body">
+                                                    <div class="card-text article_text">
+                                                        <%= comentario.getComentario() %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                            <% 
+                                        }
+                                    }
+                                }
+                                if (user != null && user.getPapel() == 2) {
+                            %>
+                                    <div class="container">
+                                        <div class="row content justify-content-md-center">
+                                            <div class="new-comment col-12">
+                                                <form class="form" method="post" action="http://localhost:8080/AlphaBlog/CriaComentario">
+                                                    <input type="hidden" class="form-control form-control-md" name="artigo_id" value="<%= artigo.getId() %>">
+                                                    <div class="form-group row">
+                                                        <textarea class="form-control form-control-md" name="texto" required="required" placeholder="Escreva um comentário." rows="5" cols="1"></textarea>
+                                                    </div>
+                                                    <div class="horizontal-align-center">
+                                                        <input class="btn save-button" type="submit" value="Salvar"/>
+                                                    </div>
+                                                </form>
+                                            </div> 					
+                                        </div>
+                                    </div>
+                            <%
+                                }
+                            %>
+                    
+                        </div>
+                    </div>
                     <% 
                         boolean artigosPendentes = "pendentes".equals(request.getParameter("modo_listagem"));
                         if (artigosPendentes && user.getPapel() == 0){ %>

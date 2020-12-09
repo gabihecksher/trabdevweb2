@@ -215,5 +215,37 @@ public class ArtigoDAO {
         return artigos;
     }
     
+    public Artigo getArtigoPorID(int id) {
+        Connection connection = null;
+        Artigo artigo = new Artigo();
+        System.out.println(id);
+        try {
+            connection = new Conexao().criaConexao();
+            System.out.println(id);
+            String sql = "SELECT * FROM artigo WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("ACHOU ARTIGO");
+                artigo.setId(rs.getInt("id"));
+                artigo.setUsuario(rs.getInt("id_usuario"));
+                artigo.setCategoria(rs.getInt("id_categoria"));
+                artigo.setTitulo(rs.getString("titulo"));
+                artigo.setConteudo(rs.getString("conteudo"));
+                artigo.setLiberar(rs.getString("liberar"));
+                artigo.setAprovado(rs.getString("aprovado"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("NÃO ACHOU ARTIGO");
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+        return artigo;
+    }
+    
+    
     
 }

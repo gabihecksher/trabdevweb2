@@ -102,4 +102,10 @@ public class Artigo {
     public boolean liberaArtigo(int artigo_id){
         return new ArtigoDAO().liberaArtigo(artigo_id);
     }
+    
+    public Artigo getArtigo(int artigo_id){
+        System.out.println(artigo_id);
+        ArtigoDAO artigoDAO = new ArtigoDAO();
+        return artigoDAO.getArtigoPorID(artigo_id);
+    }
 }
