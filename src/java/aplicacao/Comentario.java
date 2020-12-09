@@ -65,4 +65,13 @@ public class Comentario {
     public List<Comentario> listarComentarioPorArtigos(List<Integer> id_artigos) {
         return new ComentarioDAO().listarComentarioPorArtigos(id_artigos);
     }
+    
+    public boolean excluir(int comentario_id){
+        return new ComentarioDAO().excluir(comentario_id);
+    }
+    
+    public Comentario getComentarioPorId(int id){
+        System.out.println(id);
+        return new ComentarioDAO().getComentarioPorID(id);
+    }
 }

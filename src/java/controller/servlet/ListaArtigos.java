@@ -34,18 +34,24 @@ public class ListaArtigos extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
+        System.out.println("-----------------");
+        System.out.println("Usuario:");
+        System.out.println(current_user);
         
         response.setContentType("text/html;charset=UTF-8");
         String modo_listagem = "publicados";
         if (request.getParameter("modo_listagem") != null){
             modo_listagem = request.getParameter("modo_listagem");
         }
+        System.out.println(modo_listagem);
+        
         Artigo artigo = new Artigo();
         List<Artigo> lista_artigos = null;
         String titulo = "Artigos";
         if (modo_listagem.equals("publicados")){
             lista_artigos = artigo.listaArtigosPublicados();
             titulo = "Artigos publicados";
+            System.out.println(titulo);
         }
         else{
             if (modo_listagem.equals("pendentes")){
@@ -79,12 +85,18 @@ public class ListaArtigos extends HttpServlet {
                 id_artigos.add(temp_artigo.getId());
             }
         }
+        System.out.println(id_artigos);
         Comentario comentario = new Comentario();
-        List<Comentario> lista_comentarios = comentario.listarComentarioPorArtigos(id_artigos);
+        List<Comentario> lista_comentarios = new ArrayList<>();
+        lista_comentarios = comentario.listarComentarioPorArtigos(id_artigos);
         
         request.setAttribute("lista_artigos", lista_artigos);
         request.setAttribute("lista_comentarios", lista_comentarios);
         request.setAttribute("titulo", titulo);
+        System.out.println(lista_artigos);
+        System.out.println(lista_comentarios);
+        System.out.println(titulo);
+        
         RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_article.jsp");
         rd.forward(request, response);
         

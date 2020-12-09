@@ -55,6 +55,9 @@ public class ComentarioDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Comentario> comentarios = new ArrayList<>();
+        if(id_artigos.size() == 0){
+            return comentarios;
+        }
         Comentario comentario = null;
 
         try {
@@ -92,17 +95,20 @@ public class ComentarioDAO {
     public Comentario getComentarioPorID(int id) {
         Comentario comentario = new Comentario();
         try {
+            Connection connection = new Model.Conexao().criaConexao();
             String sql = "SELECT * FROM comentario WHERE id = ?";
-            PreparedStatement ps = conexao.prepareStatement(sql);
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
-
+            System.out.println(ps);
+                
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                System.out.println("ACHEEEI");
                 comentario.setId(rs.getInt("id"));
                 comentario.setComentario(rs.getString("comentario"));
-                comentario.setArtigo(rs.getInt("artigo_id"));
-                comentario.setUsuario(rs.getInt("usuario_id"));
+                comentario.setArtigo(rs.getInt("id_artigo"));
+                comentario.setUsuario(rs.getInt("id_usuario"));
             }
 
         } catch (SQLException e) {
@@ -142,5 +148,19 @@ public class ComentarioDAO {
         }
     }
     
+    public boolean excluir(int id) {
+        try {
+            Connection connection = new Conexao().criaConexao();
+            System.out.println(id);
+            String sql = "DELETE FROM comentario WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return false;
+        }
+    }
     
 }

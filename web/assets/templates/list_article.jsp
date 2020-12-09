@@ -81,7 +81,7 @@
                                                             %>
                                                                 <div class="col-md-2">
                                                                     <button class="button-edit btn btn-warning">Editar <i class="fas fa-edit"></i></button>
-                                                                    <button class="button-delete btn btn-danger">Excluir <i class="fas fa-trash-alt"></i></button>
+                                                                    <a class="button-delete btn btn-danger" href="ExcluiComentario?id=<%= comentario.getId() %>">Excluir <i class="fas fa-trash-alt"></i></a>
                                                                 </div>
                                                             <%
                                                                 }

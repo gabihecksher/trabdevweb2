@@ -56,26 +56,36 @@ public class Login extends HttpServlet {
             }
             Usuario user = new Usuario();
             user = user.getUsuarioPorLoginSenha(cpf_user, senha_user);
-            if (user != null && user.getCadastroAprovado().equals("S")){
-                HttpSession session = request.getSession();
-                session.setAttribute("NomeUsuarioLogado", user.getNome());
-                session.setAttribute("current_user", user);
-                session.setAttribute("SessaoAtiva", true);
-
-                request.setAttribute("user", session.getAttribute("NomeUsuarioLogado"));
-                System.out.println("Nome da sessão: " + session.getAttribute("NomeUsuarioLogado"));
-                RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
-                rd.forward(request, response);
-            } 
-            else if (user != null){
-                request.setAttribute("error_message", "Usuário pendente de aprovação.");
-                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
-                rd.forward(request, response);
-            }
-            else {
-                request.setAttribute("error_message", "CPF ou senha incorretos.");
-                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
-                rd.forward(request, response);
+            System.out.println("------------------");
+            System.out.println(user.getCadastroAprovado());
+            switch (user.getCadastroAprovado()) {
+                case "S":
+                    {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("NomeUsuarioLogado", user.getNome());
+                        session.setAttribute("current_user", user);
+                        session.setAttribute("SessaoAtiva", true);
+                        request.setAttribute("user", session.getAttribute("NomeUsuarioLogado"));
+                        System.out.println("-------------------------");
+                        System.out.println("Nome da sessão: " + session.getAttribute("NomeUsuarioLogado"));
+                        RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
+                        rd.forward(request, response);
+                        break;
+                    }
+                case "N":
+                    {
+                        request.setAttribute("error_message", "Usuário pendente de aprovação.");
+                        RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                        rd.forward(request, response);
+                        break;
+                    }
+                default:
+                    {
+                        request.setAttribute("error_message", "CPF ou senha incorretos.");
+                        RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                        rd.forward(request, response);
+                        break;
+                    }
             }
         } else {
             request.setAttribute("error_message", "Você já está logado.");
