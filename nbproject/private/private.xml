@@ -5,9 +5,14 @@
         <group>
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/web/assets/templates/list_article.jsp</file>
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/controller/servlet/Login.java</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/controller/servlet/CriaArtigo.java</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/controller/servlet/CriaComentario.java</file>
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/aplicacao/Comentario.java</file>
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/controller/servlet/ExcluiComentario.java</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/controller/servlet/ListaArtigos.java</file>
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/model/ComentarioDAO.java</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/web/assets/templates/navbar.jsp</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/AlphaBlog/src/java/aplicacao/Usuario.java</file>
         </group>
     </open-files>
 </project-private>

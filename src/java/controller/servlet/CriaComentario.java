@@ -29,11 +29,11 @@ public class CriaComentario extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
-        if (current_user != null && current_user.getPapel() == 2){
+        if (current_user != null && (current_user.isAdmin() || current_user.isComentarista())){
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_article.jsp");
             rd.forward(request, response);
         } else {
-            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" podem escrever um comentário.");
+            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" ou \"Administrador\" podem criar um comentário.");
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
             rd.forward(request, response);
         }
@@ -44,17 +44,15 @@ public class CriaComentario extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
-        if (current_user != null && current_user.getPapel() == 2){
+        if (current_user != null && (current_user.isAdmin() || current_user.isComentarista())){
             int current_user_id = current_user.getId();
             int artigo_id = Integer.parseInt(request.getParameter("artigo_id"));
             String texto = request.getParameter("texto");
             
             Comentario comentario = new Comentario();
             comentario.setUsuario(current_user_id);
-            comentario.setComentario(texto);
-            System.out.println("----------------");
-            System.out.println(artigo_id);
             comentario.setArtigo(artigo_id);
+            comentario.setComentario(texto);
             
             boolean sucesso = comentario.salvarComentario();
             if (sucesso){
@@ -62,11 +60,12 @@ public class CriaComentario extends HttpServlet {
                 rd.forward(request, response);
             }
             else{
-                RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
+                request.setAttribute("error_message", "Ocorreu um erro ao criar o comentário.");
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
                 rd.forward(request, response);
             }
         } else {
-            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" podem criar um comentário.");
+            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" ou \"Administrador\" podem criar um comentário.");
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
             rd.forward(request, response);
         }

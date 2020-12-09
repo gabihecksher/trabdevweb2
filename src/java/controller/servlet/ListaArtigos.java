@@ -85,7 +85,6 @@ public class ListaArtigos extends HttpServlet {
                 id_artigos.add(temp_artigo.getId());
             }
         }
-        System.out.println(id_artigos);
         Comentario comentario = new Comentario();
         List<Comentario> lista_comentarios = new ArrayList<>();
         lista_comentarios = comentario.listarComentarioPorArtigos(id_artigos);
@@ -93,9 +92,6 @@ public class ListaArtigos extends HttpServlet {
         request.setAttribute("lista_artigos", lista_artigos);
         request.setAttribute("lista_comentarios", lista_comentarios);
         request.setAttribute("titulo", titulo);
-        System.out.println(lista_artigos);
-        System.out.println(lista_comentarios);
-        System.out.println(titulo);
         
         RequestDispatcher rd = request.getRequestDispatcher("assets/templates/list_article.jsp");
         rd.forward(request, response);
