@@ -81,8 +81,15 @@
                                                                 
                                                         %>
                                                                 <div class="col-md-2">
-                                                                    <button class="button-edit btn btn-warning">Editar <i class="fas fa-edit"></i></button>
-                                                                    <button class="button-delete btn btn-danger">Excluir <i class="fas fa-trash-alt"></i></button>
+                                                                    <a class="button-edit btn btn-warning">Editar <i class="fas fa-edit"></i></a>
+                                                                    <form class="form" method="post" action="http://localhost:8080/AlphaBlog/ExcluiComentario">
+                                                                        <input type="hidden" class="form-control form-control-md" name="comentario_id" value="<%= comentario.getId() %>">
+                                                                        <div class="horizontal-align-center">
+                                                                            <div class="button-delete btn btn-danger">
+                                                                                <input class="button-delete" type="submit" value="Excluir"/><i class="fas fa-trash-alt"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
                                                                 </div>
                                                         <%
                                                             }

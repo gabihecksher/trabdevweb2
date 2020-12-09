@@ -21,19 +21,31 @@ import javax.servlet.http.HttpSession;
  *
  * @author gabri
  */
-@WebServlet(name = "CriaComentario", urlPatterns = {"/CriaComentario"})
-public class CriaComentario extends HttpServlet {
-    
+@WebServlet(name = "ExcluiComentario", urlPatterns = {"/ExcluiComentario"})
+public class ExcluiComentario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
         if (current_user != null && current_user.getPapel() == 2){
-            RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
-            rd.forward(request, response);
+            int current_user_id = current_user.getId();
+            int comentario_id = Integer.parseInt(request.getParameter("comentario_id"));
+            
+            Comentario comentario = new Comentario();
+            boolean sucesso = comentario.excluir(comentario_id);
+            
+            if (sucesso){
+                RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
+                rd.forward(request, response);
+            }
+            else{
+                request.setAttribute("error_message", "Ocorreu um erro ao excluir o comentário.");
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
+                rd.forward(request, response);
+            }
         } else {
-            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" podem escrever um comentário.");
+            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" podem criar um comentário.");
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
             rd.forward(request, response);
         }
@@ -45,28 +57,19 @@ public class CriaComentario extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
         if (current_user != null && current_user.getPapel() == 2){
-            int current_user_id = current_user.getId();
-            int artigo_id = Integer.parseInt(request.getParameter("artigo_id"));
-            String texto = request.getParameter("texto");
+            int comentario_id = Integer.parseInt(request.getParameter("comentario_id"));
+            System.out.println(comentario_id);
             
             Comentario comentario = new Comentario();
-            comentario.setUsuario(current_user_id);
-            comentario.setComentario(texto);
-            comentario.setArtigo(artigo_id);
+            boolean sucesso = comentario.excluir(comentario_id);
             
-            System.out.println("----------------");
-            System.out.println(current_user_id);
-            System.out.println(texto);
-            System.out.println(artigo_id);
-            
-            
-            boolean sucesso = comentario.salvarComentario();
             if (sucesso){
                 RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
                 rd.forward(request, response);
             }
             else{
-                RequestDispatcher rd = request.getRequestDispatcher("ListaArtigos");
+                request.setAttribute("error_message", "Ocorreu um erro ao excluir o comentário.");
+                RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
                 rd.forward(request, response);
             }
         } else {

@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class ComentarioDAO {
     private Connection conexao;
-
+    
     public List<Comentario> listarTodosComentariosDAO(int id_artigo) {
         Connection connection = null;
         PreparedStatement stmt = null;
@@ -134,6 +134,21 @@ public class ComentarioDAO {
 
             ps.execute();
 
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean excluir(int id) {
+        try {
+            Connection connection = new Conexao().criaConexao();
+            System.out.println(id);
+            String sql = "DELETE FROM comentario WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
             return true;
         } catch (SQLException e) {
             System.out.println("Erro de SQL: " + e.getMessage());

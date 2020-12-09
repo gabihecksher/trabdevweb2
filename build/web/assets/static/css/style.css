@@ -233,6 +233,18 @@ a:hover {
 	background-color: #dc3b2fa8;
 }
 
+.button-delete-title{
+    width:auto;
+    height:auto;
+    padding: 5px;
+    font-weight: normal !important;
+    font-size:12px;
+    margin:0;
+    color: black;
+    background: None;
+    border: None 
+}
+
 .button-delete, .button-edit{
 	width:auto;
 	height:auto;
@@ -244,7 +256,7 @@ a:hover {
 	background: None;
 	border: None
 }
-.button-delete:hover , .button-edit:hover{
+.button-delete:hover, .button-edit:hover{
 	color: #fff;
 }
 
