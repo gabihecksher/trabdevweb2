@@ -11,21 +11,22 @@
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/list_article.jsp</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/LiberaArtigo.java</file>
-            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/Login.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/head.html</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/add_user.jsp</file>
-            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/login.jsp</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/navbar.html</file>
-            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Aplicacao/Artigo.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Model/ArtigoDAO.java</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/add_user.html</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Aplicacao/Categoria.java</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/Login.java</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/login.jsp</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Aplicacao/Artigo.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/navbar.jsp</file>
+            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/ExcluirArtigo.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Model/Conexao.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/login.html</file>
-            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/web/assets/templates/add_user.html</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/AprovaArtigo.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Aplicacao/Usuario.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Controller/servlet/ListaUsuarios.java</file>
-            <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Aplicacao/Categoria.java</file>
             <file>file:/C:/Users/mreis/Desktop/TrabalhoDevWeb/trabdevweb2/src/java/Model/UsuarioDAO.java</file>
         </group>
     </open-files>

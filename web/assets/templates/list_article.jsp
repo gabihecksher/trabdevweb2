@@ -32,13 +32,20 @@
             %>
                         <div class="card">
                             <div class="card-body">
+                                <%
+                                    if ((user.getPapel() == 0) || (user.getId() == artigo.getUsuario().getId())){
+                                 %>
+                                
                                 <div class="row">
                                     <h4 class="col-md-10 card-title"><a href="index.html"><%=artigo.getTitulo()%></a></h4>
                                     <div class="col-md-2">
                                         <button class="button-edit btn btn-warning">Editar <i class="fas fa-edit"></i></button>
-                                        <button class="button-delete btn btn-danger">Excluir <i class="fas fa-trash-alt"></i></button>
+                                        <a href="ExcluirArtigo?artigo_id=<%=artigo.getId()%>"class="button-delete btn btn-danger">Excluir<i class="fas fa-trash-alt"></i></a>
                                     </div>
                                 </div>
+                                    
+                                <% } %>
+                                    
                                 <p class="card-text">
                                     <small class="text-muted">
                                         <span class="glyphicon glyphicon-user"></span>
