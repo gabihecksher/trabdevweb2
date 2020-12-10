@@ -255,7 +255,9 @@ public class ArtigoDAO {
             String sql = "DELETE FROM artigo WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, artigo_id);
+            System.out.println(ps);
             ps.execute();
+            System.out.println("EXCLUIDO");
             return true;
         } catch (SQLException e) {
             System.out.println("Erro de SQL: " + e.getMessage());

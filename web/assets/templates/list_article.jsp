@@ -33,7 +33,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <%
-                                    if ((user.getPapel() == 0) || (user.getId() == artigo.getUsuario().getId())){
+                                    if (user != null && (user.isAdmin() || user.getId() == artigo.getUsuario().getId())){
                                  %>
                                 
                                 <div class="row">
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                             <% 
-                                if (user.isAdmin()){ 
+                                if (user != null && user.isAdmin()){ 
                             %>
                                     <div class="card-footer horizontal-align-center">
                                         <a href="AprovaArtigo?artigo_id=<%=artigo.getId()%>&aprovado=S" class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
@@ -138,7 +138,7 @@
                                 }
                                 boolean artigosUsuario = "usuario".equals(request.getParameter("modo_listagem"));
                                 boolean podeLiberar = "N".equals(artigo.getLiberar());
-                                if (artigosUsuario && podeLiberar && user.isAutor()){ 
+                                if (user != null && artigosUsuario && podeLiberar && user.isAutor()){ 
                             %>
                                     <div class="card-footer horizontal-align-center">
                                         <a href="LiberaArtigo?artigo_id=<%=artigo.getId()%>"class="button-approve">Liberar para publicação<i class="fas fa-thumbs-up"></i></a>
