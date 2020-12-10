@@ -29,7 +29,7 @@ public class LiberaArtigo extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
-        if (current_user != null && current_user.getPapel() == 1){
+        if (current_user != null && current_user.isAutor()){
             response.setContentType("text/html;charset=UTF-8");
             int artigo_id = Integer.parseInt(request.getParameter("artigo_id"));
             Artigo artigo = new Artigo();

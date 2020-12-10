@@ -28,7 +28,7 @@ public class AprovaUsuario extends HttpServlet {
         
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
-        if (current_user != null && current_user.getPapel() == 0){
+        if (current_user != null && current_user.isAdmin()){
             response.setContentType("text/html;charset=UTF-8");
             int usuario_id = Integer.parseInt(request.getParameter("usuario_id"));
             Usuario usuario = new Usuario();

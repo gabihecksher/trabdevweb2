@@ -40,7 +40,7 @@ public class ListaUsuarios extends HttpServlet {
                 modo_listagem = request.getParameter("modo_listagem");
             }
             if (modo_listagem.equals("pendentes")){
-                if(current_user != null && current_user.getPapel() == 0){
+                if(current_user != null && current_user.isAdmin()){
                     lista_usuarios = usuario.getListaUsuariosPorStatus(false);
                     titulo = "Usuários pendentes";
                     request.setAttribute("titulo", titulo);

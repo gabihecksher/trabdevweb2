@@ -55,7 +55,7 @@ public class ListaArtigos extends HttpServlet {
         }
         else{
             if (modo_listagem.equals("pendentes")){
-                if (current_user != null && (current_user.getPapel() == 0 || current_user.getPapel() == 1)){
+                if (current_user != null && current_user.isAdmin()){
                     lista_artigos = artigo.listaArtigosPendentes();
                     titulo = "Artigos pendentes";
                 }
@@ -66,13 +66,13 @@ public class ListaArtigos extends HttpServlet {
                 }
             }
             if (modo_listagem.equals("usuario")){
-                if (current_user != null && current_user.getPapel() == 1){
+                if (current_user != null && (current_user.isAdmin() || current_user.isAutor())){
                     int current_user_id = current_user.getId();
                     lista_artigos = artigo.listaArtigosPorUsuario(current_user_id);
                     titulo = "Meus Artigos";
                 }
                 else {
-                    request.setAttribute("error_message", "Apenas usuários do tipo \"Autor\" podem acessar essa tela.");
+                    request.setAttribute("error_message", "Apenas usuários do tipo \"Autor\" ou \"Administrador\" podem acessar essa tela.");
                     RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
                     rd.forward(request, response);
                 }

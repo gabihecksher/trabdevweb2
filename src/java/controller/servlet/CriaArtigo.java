@@ -48,7 +48,7 @@ public class CriaArtigo extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
-        if (current_user != null && current_user.getPapel() == 1){
+        if (current_user != null && (current_user.isAdmin() || current_user.isAutor())){
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/novo_artigo.jsp");
             rd.forward(request, response);
         } else {
@@ -71,7 +71,7 @@ public class CriaArtigo extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
-        if (current_user != null && current_user.getPapel() == 1){
+        if (current_user != null && (current_user.isAdmin() || current_user.isAutor())){
             int current_user_id = current_user.getId();
             int categoria_id = Integer.parseInt(request.getParameter("categoria_id"));
             String titulo = request.getParameter("titulo");

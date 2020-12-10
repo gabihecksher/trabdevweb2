@@ -28,7 +28,7 @@ public class ExcluiComentario extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
-        if (current_user != null && (current_user.getPapel() == 2 || current_user.isAdmin())){
+        if (current_user != null && (current_user.isComentarista() || current_user.isAdmin())){
             int current_user_id = current_user.getId();
             int comentario_id = Integer.parseInt(request.getParameter("id"));
             System.out.println(comentario_id);
@@ -54,7 +54,7 @@ public class ExcluiComentario extends HttpServlet {
                 rd.forward(request, response);
             }
         } else {
-            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" podem criar um comentário.");
+            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" ou \"Administrador\" podem criar um comentário.");
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
             rd.forward(request, response);
         }
@@ -65,7 +65,7 @@ public class ExcluiComentario extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Usuario current_user =  (Usuario) session.getAttribute("current_user");
-        if (current_user != null && current_user.getPapel() == 2){
+        if (current_user != null && current_user.isComentarista()){
             int comentario_id = Integer.parseInt(request.getParameter("comentario_id"));
             System.out.println(comentario_id);
 
@@ -82,7 +82,7 @@ public class ExcluiComentario extends HttpServlet {
                 rd.forward(request, response);
             }
         } else {
-            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" podem criar um comentário.");
+            request.setAttribute("error_message", "Apenas usuários do tipo \"Comentarista\" ou \"Administrador\" podem criar um comentário.");
             RequestDispatcher rd = request.getRequestDispatcher("assets/templates/error.jsp");
             rd.forward(request, response);
         }
