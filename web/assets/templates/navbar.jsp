@@ -22,10 +22,26 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="ListaArtigos?modo_listagem=publicados">Artigos publicados</a>
-                    <a class="dropdown-item" href="ListaArtigos?modo_listagem=pendentes">Artigos pendentes</a>
-                    <a class="dropdown-item" href="ListaArtigos?modo_listagem=usuario">Meus artigos</a>
-                    
-                    <a class="dropdown-item" href="CriaArtigo">Criar artigo</a>
+                    <%
+                        if (user != null){
+                            if(user.isAdmin()){
+
+                    %>
+                                <a class="dropdown-item" href="ListaArtigos?modo_listagem=pendentes">Artigos pendentes</a>
+                    <%
+                            }
+                            if(user.isAutor()){
+                    %>
+                                <a class="dropdown-item" href="ListaArtigos?modo_listagem=usuario">Meus artigos</a>
+                    <%
+                            }
+                            if(user.isAutor() || user.isAdmin()){
+                    %>
+                                <a class="dropdown-item" href="CriaArtigo">Criar artigo</a>
+                    <%
+                            }
+                        }
+                    %>
                 </div>
             </li>
 
@@ -46,8 +62,14 @@
                     Usuários
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="ListaUsuarios?modo_listagem=pendentes">Usuários pendentes</a>
                     <a class="dropdown-item" href="ListaUsuarios?modo_listagem=aprovados">Usuários aprovados</a>
+                    <%
+                        if (user != null && user.isAdmin()){
+                    %>
+                            <a class="dropdown-item" href="ListaUsuarios?modo_listagem=pendentes">Usuários pendentes</a>
+                    <% 
+                        }
+                    %>
                     <a class="dropdown-item" href="CadastroUsuario">Criar usuário</a>
                 </div>
             </li>

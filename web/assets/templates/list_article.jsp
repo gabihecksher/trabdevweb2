@@ -83,11 +83,11 @@
                                                                 <%= comentario.getUsuario().getNome() %>
                                                             </div>
                                                             <% 
-                                                                if (user != null && comentario.getUsuario().getId() == user.getId()){
+                                                                if (user != null && (comentario.getUsuario().getId() == user.getId() || user.isAdmin())){
 
                                                             %>
                                                                 <div class="col-md-2">
-                                                                    <button class="button-edit btn btn-warning">Editar <i class="fas fa-edit"></i></button>
+                                                                    <!-- <button class="button-edit btn btn-warning">Editar <i class="fas fa-edit"></i></button> -->
                                                                     <a class="button-delete btn btn-danger" href="ExcluiComentario?id=<%= comentario.getId() %>">Excluir <i class="fas fa-trash-alt"></i></a>
                                                                 </div>
                                                             <%
@@ -105,7 +105,7 @@
                                             }
                                         }
                                     }
-                                    if (user != null && user.getPapel() == 2) {
+                                    if (user != null && (user.isAdmin() || user.isComentarista())) {
                                 %>
                                         <div class="container">
                                             <div class="row content justify-content-md-center">
@@ -129,7 +129,7 @@
                             </div>
                             <% 
                                 boolean artigosPendentes = "pendentes".equals(request.getParameter("modo_listagem"));
-                                if (artigosPendentes && user.getPapel() == 0){ 
+                                if (artigosPendentes && user.isAdmin()){ 
                             %>
                                     <div class="card-footer horizontal-align-center">
                                         <a href="AprovaArtigo?artigo_id=<%=artigo.getId()%>&aprovado=S" class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
@@ -139,7 +139,7 @@
                                 }
                                 boolean artigosUsuario = "usuario".equals(request.getParameter("modo_listagem"));
                                 boolean podeLiberar = "N".equals(artigo.getLiberar());
-                                if (artigosUsuario && podeLiberar && user.getPapel() == 1){ 
+                                if (artigosUsuario && podeLiberar && user.isAutor()){ 
                             %>
                                     <div class="card-footer horizontal-align-center">
                                         <a href="LiberaArtigo?artigo_id=<%=artigo.getId()%>"class="button-approve">Liberar para publicação<i class="fas fa-thumbs-up"></i></a>

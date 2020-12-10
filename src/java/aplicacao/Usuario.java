@@ -123,5 +123,17 @@ public class Usuario {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.aprovaUsuario(usuario_id);
     }
+    
+    public boolean isAdmin(){
+        return this.papel == 0;
+    }
+    
+    public boolean isAutor(){
+        return this.papel == 1;
+    }
+    
+    public boolean isComentarista(){
+        return this.papel == 2;
+    }
         
 }

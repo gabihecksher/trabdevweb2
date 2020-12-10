@@ -128,7 +128,9 @@ public class ComentarioDAO {
                 // Realizar uma alteração
                 sql = "UPDATE comentario SET id_usuario=?, id_artigo=?,  comentario=? WHERE id=?";
             }
-
+            System.out.println(comentario.getUsuario().getId());
+            System.out.println(comentario.getArtigo().getId());
+            System.out.println(comentario.getComentario());
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, comentario.getUsuario().getId());
             ps.setInt(2, comentario.getArtigo().getId());
