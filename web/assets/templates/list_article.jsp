@@ -128,8 +128,7 @@
                                 </div>
                             </div>
                             <% 
-                                boolean artigosPendentes = "pendentes".equals(request.getParameter("modo_listagem"));
-                                if (artigosPendentes && user.isAdmin()){ 
+                                if (user.isAdmin()){ 
                             %>
                                     <div class="card-footer horizontal-align-center">
                                         <a href="AprovaArtigo?artigo_id=<%=artigo.getId()%>&aprovado=S" class="button-approve">Aprovar<i class="fas fa-thumbs-up"></i></a>
